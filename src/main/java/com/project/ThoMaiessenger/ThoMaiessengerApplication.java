@@ -10,4 +10,10 @@ public class ThoMaiessengerApplication {
 		SpringApplication.run(ThoMaiessengerApplication.class, args);
 	}
 
+
+	/*	TO-DO
+
+		Don't forget to redirect the frontend proxy to the hosted location of the backend server.
+	 */
+
 }
