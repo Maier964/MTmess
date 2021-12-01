@@ -14,6 +14,8 @@ public class ThoMaiessengerApplication {
 	/*	TO-DO
 
 		Don't forget to redirect the frontend proxy to the hosted location of the backend server.
+
+		Implement username or email already exists ( outside the User function, before creating an user object ).
 	 */
 
 }
