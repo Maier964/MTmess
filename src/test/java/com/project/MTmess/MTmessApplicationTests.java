@@ -1,10 +1,10 @@
-package com.project.ThoMaiessenger;
+package com.project.MTmess;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ThoMaiessengerApplicationTests {
+class MTmessApplicationTests {
 
 	@Test
 	void contextLoads() {

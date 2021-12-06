@@ -1,4 +1,4 @@
-package com.project.ThoMaiessenger.Logic;
+package com.project.MTmess.Logic;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

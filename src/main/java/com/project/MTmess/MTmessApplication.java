@@ -1,13 +1,13 @@
-package com.project.ThoMaiessenger;
+package com.project.MTmess;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ThoMaiessengerApplication {
+public class MTmessApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThoMaiessengerApplication.class, args);
+		SpringApplication.run(MTmessApplication.class, args);
 	}
 
 
