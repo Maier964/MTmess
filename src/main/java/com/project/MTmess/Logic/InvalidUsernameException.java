@@ -1,4 +1,4 @@
-package com.project.ThoMaiessenger.Logic;
+package com.project.MTmess.Logic;
 
 public class InvalidUsernameException extends Exception{
 

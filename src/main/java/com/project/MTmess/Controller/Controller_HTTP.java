@@ -1,4 +1,4 @@
-package com.project.ThoMaiessenger.Controller;
+package com.project.MTmess.Controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
