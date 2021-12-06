@@ -19,7 +19,7 @@ function App () {
           <h1 className="App-title">{message}</h1>
         </header>
         <p className="App-intro">
-          Start of app.
+          This is a test to check for correct branch commit.
         </p>
       </div>
   )
