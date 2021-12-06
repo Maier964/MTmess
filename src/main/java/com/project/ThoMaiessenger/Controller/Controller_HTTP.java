@@ -16,6 +16,6 @@ public class Controller_HTTP {
 
     @GetMapping("api/backend2")
     public String what_now(){
-        return "Will this also show in react?"; // Answer : Not by default, needs to be forked in react
+        return "Will this also show on gitHub?"; // Answer : Not by default, needs to be forked in react
     }
 }
