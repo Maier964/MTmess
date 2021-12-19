@@ -1,5 +1,7 @@
 package com.project.MTmess.Logic;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +12,8 @@ public class User {
     private String email;
     private String password;
     private ArrayList<User> friends;
+
+//    public User() { ; }
 
     public User(String username, String email, String password){
         try{
