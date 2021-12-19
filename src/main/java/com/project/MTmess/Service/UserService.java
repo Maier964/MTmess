@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository; //
 
     public List< UserEntity > getAllUsers(){
         List<UserEntity> userEntities = new ArrayList<>();
