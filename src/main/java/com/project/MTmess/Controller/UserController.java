@@ -20,7 +20,7 @@ public class UserController {
             userService.saveUser(user);
             return "User was added!";
         }catch ( Exception e ) {
-            return "Failed to add user.";
+            return "<html><body><h1>Failed to add user.</h1></body></html>";
         }
     }
 }
