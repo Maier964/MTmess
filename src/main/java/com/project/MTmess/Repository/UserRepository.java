@@ -1,9 +1,10 @@
 package com.project.MTmess.Repository;
 
 import com.project.MTmess.Model.UserEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
-public interface UserRepository extends CrudRepository<UserEntity, Integer> { ;
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 }

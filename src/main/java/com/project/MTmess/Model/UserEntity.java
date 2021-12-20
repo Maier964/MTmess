@@ -1,21 +1,18 @@
 package com.project.MTmess.Model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.project.MTmess.Logic.User;
 import org.hibernate.annotations.Type;
 
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 @Table(name = "Users")
 @Entity
 public class UserEntity{
 
-    public UserEntity() { ; } // Empty constructor needed according to JPA requirements
+    public UserEntity(){} // Empty constructor needed according to JPA requirements
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) // auto increment for new entries
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)// auto increment for new entries
     private Integer ID;
 
     @Column
@@ -27,13 +24,32 @@ public class UserEntity{
     @Column(nullable = false)
     private String hashed_password;
 
-//    @Type(type = "list-array")
-//    @Column( columnDefinition = "integer[]")
-//    private List<User> friends; // add user object hash here.
-//
-//    @Type(type = "list-array")
-//    @Column ( columnDefinition = " integer[] ")
-//    private List<Integer> messages; // add message object hash here.
+    @Column
+    @Type( type = "com.project.MTmess.Util.GenericArrayUserType" )
+    private String[] friends_hash;
+
+    @Column
+    @Type( type = "com.project.MTmess.Util.GenericArrayUserType" )
+    private String[] messages_hash;
+
+
+    public String[] getFriends_hash() {
+        return friends_hash;
+    }
+
+    public void setFriends_hash(String[] friends_hash) {
+        this.friends_hash = friends_hash;
+    }
+
+    public String[] getMessages_hash() {
+        return messages_hash;
+    }
+
+    public void setMessages_hash(String[] messages_hash) {
+        this.messages_hash = messages_hash;
+    }
+
+
 
 
     public Integer getID() {
