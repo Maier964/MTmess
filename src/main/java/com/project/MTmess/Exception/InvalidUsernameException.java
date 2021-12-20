@@ -1,4 +1,4 @@
-package com.project.MTmess.Logic;
+package com.project.MTmess.Exception;
 
 public class InvalidUsernameException extends Exception{
 
