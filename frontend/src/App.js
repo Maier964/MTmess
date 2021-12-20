@@ -1,6 +1,7 @@
 // import React, {Component, useState, useEffect} from 'react';
 import './App.css';
-import AppBar from './components/Appbar';
+//import AppBar from './components/Appbar';
+import Login from './components/login';
 
 function App () {
   // const [message, setMessage] = useState("");
@@ -24,7 +25,7 @@ function App () {
   //     </div>
   // )
   return (   <div className='App'>
-  <AppBar/>
+  <Login/>
 </div> );
 
 }
