@@ -42,7 +42,7 @@ const Register = () => {
             <Grid align='center'>
                     <Avatar style={avatarStyle}> <AddReaction/>  </Avatar>
                     <h2 fullwidth={true}> MTmess </h2> 
-            </Grid>
+
             <TextField label='Username' placeholder='Enter username' fullwidth={true} required
             value={name} onChange={(e)=>setName(e.target.value)} /> {/* Using react hooks to save the name to the state variable */}
 
@@ -60,7 +60,7 @@ const Register = () => {
             <Typography> 
             <Button href="/" variant='contained' type='submit' color='primary' fullwidth={true} style={buttonStyle}> Back </Button>
             </Typography>
-
+            </Grid>
         </Paper>
     </Grid>
     );

@@ -36,11 +36,11 @@ const Login=()=>{
                 <Grid align='center'>
                         <Avatar style={avatarStyle}> <AddReaction/>  </Avatar>
                         <h2 fullwidth={true}> MTmess </h2> 
-                </Grid>
+                
                 <TextField label='Username' placeholder='Enter username' fullwidth={true} required/>
                 <TextField label='Password' placeholder='Enter password' type='password' fullwidth={true} required/>
                 <Button variant='contained' type='submit' color='primary' fullwidth={true} style={buttonStyle}> Sign in </Button>
-
+                </Grid>
                 <Typography>
                     <Link href="#"> Forgot Password? </Link>
                 </Typography>
