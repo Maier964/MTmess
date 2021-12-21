@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -20,7 +21,7 @@ public class UserController {
             userService.saveUser(user);
             return "User was added!";
         }catch ( Exception e ) {
-            return "<html><body><h1>Failed to add user.</h1></body></html>";
+            return "Failed to add user.";
         }
     }
 }

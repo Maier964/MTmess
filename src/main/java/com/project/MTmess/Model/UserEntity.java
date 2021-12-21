@@ -174,8 +174,8 @@ public class UserEntity{
 
         }
 
-        catch ( NoSuchAlgorithmException exep) {
-            throw new RuntimeException(exep);
+        catch ( NoSuchAlgorithmException exp) {
+            throw new RuntimeException(exp);
         }
 
 
