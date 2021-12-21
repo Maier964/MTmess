@@ -1,7 +1,9 @@
 // import React, {Component, useState, useEffect} from 'react';
 import './App.css';
-//import AppBar from './components/Appbar';
+import Feed from './components/feed';
 import Login from './components/login';
+import Register from './components/register'
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App () {
   // const [message, setMessage] = useState("");
@@ -24,9 +26,22 @@ function App () {
   //       </p>
   //     </div>
   // )
-  return (   <div className='App'>
-  <Login/>
-</div> );
+//   return (   <div className='App'>
+//   <Login/>
+// </div> );
+  return (
+
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route  path="/register" element={<Register/>}/>
+          <Route path="/feed" element={<Feed/>} isPrivate/>
+          <Route element={<Login/>}/>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 
 }
 

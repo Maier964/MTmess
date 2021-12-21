@@ -19,7 +19,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
-const messages = [
+const messages = [ // these need to be recieved from the DB
   {
     id: 1,
     primary: 'Brunch this week?',
@@ -77,7 +77,7 @@ const StyledFab = styled(Fab)({
   margin: '0 auto',
 });
 
-export default function Appbar() {
+export default function Feed() {
   return (
     <React.Fragment>
       <CssBaseline />
