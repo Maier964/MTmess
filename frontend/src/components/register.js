@@ -22,11 +22,11 @@ const Register = () => {
     // Used for exporting to backend
     const [name,setName]=useState('');
     const [email,setEmail]=useState('');
-    const [hashed_password,setPassword]=useState('');
+    const [hashedpassword,setPassword]=useState('');
 
     const clickHandler=(e)=>{
         e.preventDefault()
-        const user={name,email,hashed_password}
+        const user={name,email,hashedpassword}
         console.log(user)
         fetch("http://localhost:8080/user/add",{
             method:"POST",
@@ -52,7 +52,7 @@ const Register = () => {
             <TextField label=' ' placeholder='Enter birthdate' type='date' fullwidth={true}/>
 
             <TextField label='Password' placeholder='Enter password' type='password' fullwidth={true} required
-            value={hashed_password} onChange={(e)=>setPassword(e.target.value)}/>
+            value={hashedpassword} onChange={(e)=>setPassword(e.target.value)}/>
 
             <Button variant='contained' type='submit' color='primary' fullwidth={true} style={buttonStyle} onClick={clickHandler}> Register </Button>
 
@@ -63,7 +63,7 @@ const Register = () => {
             </Grid>
         </Paper>
     </Grid>
-    );
+    );  
 };
 
 export default Register;

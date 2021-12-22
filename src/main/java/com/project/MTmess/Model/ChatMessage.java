@@ -5,9 +5,6 @@ public class ChatMessage {
     private String content;
     private String sender;
     private String receiver;
-    private MessageState type;
-
-    public enum MessageState{ CHAT, LEAVE, JOIN }
 
     public String getContent() {
         return content;
@@ -33,11 +30,12 @@ public class ChatMessage {
         this.receiver = receiver;
     }
 
-    public MessageState getType() {
-        return type;
-    }
-
-    public void setType(MessageState type) {
-        this.type = type;
+    @Override
+    public String toString() { // For debugging in console
+        return "ChatMessage{" +
+                "content='" + content + '\'' +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                '}';
     }
 }

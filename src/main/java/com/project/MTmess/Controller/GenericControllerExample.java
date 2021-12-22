@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 @RestController
-public class Controller_HTTP {
+public class GenericControllerExample {
 
     @GetMapping("/api/backend") // Backend hosted on http://localhost:8080/api/backend
     public String start(){

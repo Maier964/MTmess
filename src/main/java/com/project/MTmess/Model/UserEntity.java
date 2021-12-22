@@ -3,7 +3,6 @@ package com.project.MTmess.Model;
 import com.project.MTmess.Exception.InvalidEmailException;
 import com.project.MTmess.Exception.InvalidPasswordException;
 import com.project.MTmess.Exception.InvalidUsernameException;
-import org.hibernate.annotations.Type;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -24,7 +23,7 @@ public class UserEntity{
     @Id @GeneratedValue(strategy = GenerationType.AUTO)// auto increment for new entries
     private Integer ID;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
 
@@ -33,15 +32,7 @@ public class UserEntity{
     private String email;
 
     @Column(nullable = false)
-    private String hashed_password;
-
-    @Column
-    @Type( type = "com.project.MTmess.Util.GenericArrayUserType" )
-    private String[] friends_hash;
-
-    @Column
-    @Type( type = "com.project.MTmess.Util.GenericArrayUserType" )
-    private String[] messages_hash;
+    private String hashedpassword;
 
 
     public UserEntity(String username, String email, String password){
@@ -76,17 +67,10 @@ public class UserEntity{
         return email;
     }
 
-    public String getHashed_password() {
-        return hashed_password;
+    public String getHashedpassword() {
+        return hashedpassword;
     }
 
-    public String[] getFriends_hash() {
-        return friends_hash;
-    }
-
-    public String[] getMessages_hash() {
-        return messages_hash;
-    }
 
     public void setEmail(String email) throws InvalidEmailException{
 
@@ -135,24 +119,17 @@ public class UserEntity{
                     "one lowercase letter, one digit and one special character and more than 6 characters in total");
 
 
-        this.hashed_password = password;
+        this.hashedpassword = password;
     }
 
-    public void setHashed_password(String hashed_password) {
-            this.hashed_password = hashed_password;
+    public void setHashedpassword(String hashed_password) {
+            this.hashedpassword = hashed_password;
     }
 
     public void setID(Integer ID) {
         this.ID = ID;
     }
 
-    public void setFriends_hash(String[] friends_hash) {
-        this.friends_hash = friends_hash;
-    }
-
-    public void setMessages_hash(String[] messages_hash) {
-        this.messages_hash = messages_hash;
-    }
 
     public String getHash(@NotNull String inp)
     {

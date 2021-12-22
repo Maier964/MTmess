@@ -1,29 +1,18 @@
 package com.project.MTmess.Controller;
 
-
 import com.project.MTmess.Model.ChatMessage;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
 
-@Controller
+@RestController // Handles incoming messages and sends them to the users.
 public class ChatController {
 
+    @MessageMapping("/chat/{username}") // same as configured endpoint for the broker
+    public void sendMessage(@DestinationVariable String username, ChatMessage message){
+        System.out.println("handling sent message..." + message + "to: " + username);
 
-    @MessageMapping("/chat.register")
-    @SendTo("/chat/public") // we send it to the simple broker
-    public ChatMessage register(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) { // to capture requests
-        Objects.requireNonNull(headerAccessor.getSessionAttributes()).put(chatMessage.getReceiver(), chatMessage.getSender());
-        return chatMessage;
-    }
-
-    @MessageMapping("/chat.send")
-    @SendTo("/chat/pubic")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
-        return chatMessage;
+        // Check if username exists in our storage... FindByUsername needs to be implemented here
     }
 }
