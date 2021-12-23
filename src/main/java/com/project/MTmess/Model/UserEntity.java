@@ -22,11 +22,9 @@ public class UserEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)// auto increment for new entries
     private Integer ID;
-
+    
     @Column(unique = true)
     private String name;
-
-
 
     @Column
     private String email;

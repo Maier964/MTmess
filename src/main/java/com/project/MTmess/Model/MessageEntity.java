@@ -1,10 +1,31 @@
 package com.project.MTmess.Model;
 
-public class ChatMessage {
+import javax.persistence.*;
 
+@Table(name = "Messages")
+@Entity
+public class MessageEntity {
+
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer ID;
+
+    @Column
     private String content;
+
+    @Column
     private String sender;
+
+    @Column
     private String receiver;
+
+    public MessageEntity() {
+    }
+
+    public MessageEntity(String content, String sender, String receiver) {
+        this.content = content;
+        this.sender = sender;
+        this.receiver = receiver;
+    }
 
     public String getContent() {
         return content;

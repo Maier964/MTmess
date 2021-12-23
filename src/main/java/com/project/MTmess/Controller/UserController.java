@@ -1,6 +1,5 @@
 package com.project.MTmess.Controller;
 
-
 import com.project.MTmess.Model.UserEntity;
 import com.project.MTmess.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
-public class DatabaseController {
+public class UserController {
 
     @Autowired
     private UserService userService;
-
 
     @PostMapping("/add")
     public String add(@RequestBody UserEntity user){

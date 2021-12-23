@@ -1,6 +1,6 @@
 package com.project.MTmess.Controller;
 
-import com.project.MTmess.Model.ChatMessage;
+import com.project.MTmess.Model.MessageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -22,7 +22,7 @@ public class ChatController {
 
 
     @MessageMapping("/chat/{username}") // same as configured endpoint for the broker
-    public String sendMessage(@DestinationVariable String username, ChatMessage message) throws IOException {
+    public String sendMessage(@DestinationVariable String username, MessageEntity message) throws IOException {
         System.out.println("handling sent message..." + message + "to: " + username);
 
         // Check if username exists ( using GET requests to our API )
