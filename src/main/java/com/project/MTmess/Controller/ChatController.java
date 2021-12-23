@@ -1,8 +1,10 @@
 package com.project.MTmess.Controller;
 
 import com.project.MTmess.Model.ChatMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
@@ -15,11 +17,16 @@ import java.net.URL;
 @RestController // Handles incoming messages and sends them to the users.
 public class ChatController {
 
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate; // wrapper for socket logic
+
+
     @MessageMapping("/chat/{username}") // same as configured endpoint for the broker
     public String sendMessage(@DestinationVariable String username, ChatMessage message) throws IOException {
         System.out.println("handling sent message..." + message + "to: " + username);
 
         // Check if username exists ( using GET requests to our API )
+        // This part should be written in a ChatService class... It is not the controllers job to do this kind of logic!
         URL url = new URL("http://localhost:8080/user/find?name=" + username); // Single parameter so no need to manually forge map of parameters
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection(); // This just creates a connection, doesn't open it. Request still needs to be forged
@@ -41,11 +48,12 @@ public class ChatController {
         if ( response.length() != 0 )
         {
             // continue, user was found.
+            simpMessagingTemplate.convertAndSend("/topic/messages/" + username, message);
             return "Success!";
         }
         else
         {
-            return "User " + username + " doesn't exist.";
+            return "User " + username + " doesn't exist."; // ToImpl : Throw some exception
         }
 
 

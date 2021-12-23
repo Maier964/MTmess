@@ -14,11 +14,11 @@ public class SocketConfig implements WebSocketMessageBrokerConfigurer {
     // Overriding default methods to set custom directory endpoints
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
-        registry.addEndpoint("/chat").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/chat").setAllowedOriginPatterns("*").withSockJS();
     }
 
     @Override
     public void configureMessageBroker(@NotNull MessageBrokerRegistry registry){ // MessageHandler
-        registry.setApplicationDestinationPrefixes("/app").enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/app").enableSimpleBroker("/topic", "/queue");
     }
 }
