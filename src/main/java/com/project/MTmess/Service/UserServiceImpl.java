@@ -5,6 +5,8 @@ import com.project.MTmess.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -14,7 +16,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity saveUser(UserEntity user) {
-        return userRepository.save(user);
+
+        UserEntity userAux = userRepository.findByName(user.getName());
+
+        System.out.println(userAux);
+        if (userAux == null) {
+            return userRepository.save(user);
+        }
+        System.out.println("User already exists");
+        return null;
     }
 
     public UserEntity findByName(String name){

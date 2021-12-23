@@ -20,7 +20,7 @@ public class UserController {
         try {
             user.setHashedpassword( user.getHash( user.getHashedpassword() ) );
             userService.saveUser(user);
-            return "User was added!";
+            return "User was added!";  // TO BE IMPLEMENTED: if user already exists, don't print this
         }catch ( Exception e ) {
             return "Failed to add user.";
         }
