@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     UserEntity findByName(String name); // For routing socket communication
     UserEntity findByNameAndHashedpassword(String name, String hashedpassword); // For client authentication
+
 }

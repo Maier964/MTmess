@@ -33,7 +33,7 @@ public class DatabaseController {
         return new ResponseEntity<>(userService.findByName(name), HttpStatus.OK);
     }
 
-    @GetMapping("/find/log") // Using the same route throws no error, we just need to be careful when choosing the GET parameters
+    @GetMapping("/find/log")
     public ResponseEntity<UserEntity> findByNameAndHashedpassword(@RequestParam String name, @RequestParam String password){
         return new ResponseEntity<>(userService.findByNameAndHashedpassword(name,password), HttpStatus.OK);
     }
