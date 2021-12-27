@@ -21,7 +21,7 @@ public class ChatController {
     private SimpMessagingTemplate simpMessagingTemplate; // wrapper for socket logic
 
 
-    @MessageMapping("/chat/{username}") // same as configured endpoint for the broker
+    @MessageMapping("/chat/{username}")  // same as configured endpoint for the broker
     public String sendMessage(@DestinationVariable String username, MessageEntity message) throws IOException {
         System.out.println("handling sent message..." + message + "to: " + username);
 
@@ -48,11 +48,12 @@ public class ChatController {
         if ( response.length() != 0 )
         {
             // continue, user was found.
-            simpMessagingTemplate.convertAndSend("/topic/messages/" + username, message);
+            simpMessagingTemplate.convertAndSendToUser(username, "/topic/messages/", message);
             return "Success!";
         }
         else
         {
+            System.out.println("User" + username + "doesn't exist."); // Debug
             return "User " + username + " doesn't exist."; // ToImpl : Throw some exception
         }
 

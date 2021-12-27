@@ -13,8 +13,9 @@ public class SocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(@NotNull MessageBrokerRegistry registry){ // MessageHandler
-        registry.enableSimpleBroker("/topic", "/queue");
+        registry.enableSimpleBroker("/topic");
         registry.setApplicationDestinationPrefixes("/app");
+        registry.setUserDestinationPrefix("/users");
     }
 
     // Overriding default methods to set custom directory endpoints
