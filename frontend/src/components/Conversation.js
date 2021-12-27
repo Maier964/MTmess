@@ -4,7 +4,8 @@ import Stomp from 'stompjs';
 const Conversation = ({ conversation, setConversation}) => {
 
 
-    var client = null; // declaration of client
+    var client = null; // declaration of client needs to be global. 
+    // (Im not sure if the other components have acess to this, and it should.. (For sending messages))
 
     const myName = "Maier" // User attributes need to be inherited from parent components ( feed.js )
 
@@ -12,13 +13,13 @@ const Conversation = ({ conversation, setConversation}) => {
         setConversation(conversation)
 
         // Using SockJS over Stomp 
-        var mySocket = new SockJS('http://localhost:8080/chat/' + conversation.name );
+        var mySocket = new SockJS('http://localhost:8080/chat/' );
         client = Stomp.over(mySocket);
 
         client.connect( {username:myName} , function(frame) { 
             // setConnected(true);
             console.log('Connected '+ frame);
-            client.subscribe('users/topic/messages', function(messageOutput)
+            client.subscribe('topic/messages/' + conversation.name, function(messageOutput)
             { showMessageOutput(JSON.parse(messageOutput.body)); });
          } );
     }

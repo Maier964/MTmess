@@ -48,7 +48,7 @@ public class ChatController {
         if ( response.length() != 0 )
         {
             // continue, user was found.
-            simpMessagingTemplate.convertAndSendToUser(username, "/topic/messages/", message);
+            simpMessagingTemplate.convertAndSend("/topic/messages/" + username, message);
             return "Success!";
         }
         else
