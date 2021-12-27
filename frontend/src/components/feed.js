@@ -1,4 +1,4 @@
-import * as React from 'react';
+/*import * as React from 'react';
 import SockJsClient from "react-stomp";
 import { TalkBox } from "react-talk";
 
@@ -15,7 +15,7 @@ class Feed extends React.Component{
     }
 
     onMessageReceive = (message, topic) => {
-      this.setState( prevState => ( 
+      this.setState( prevState => (
         {
           messages: [...prevState.messages, message]
         }
@@ -49,6 +49,42 @@ class Feed extends React.Component{
       );
     }
 
+}
+
+export default Feed;*/
+
+import TypeBar from './TypeBar';
+import Messages from "./Messages";
+import Conversations from "./Conversations";
+import { useState, useEffect } from 'react'
+
+// For testing, this should come from backend
+// The user should be received by the feed as a prop
+const user = "Thomas";
+
+const Feed = () => {
+
+    // For testing, this should come from backend
+    // The conversation tells me to whom the current user is talking right now
+    const [conversation, setConversation] = useState({
+        id: 80,
+        name: "Generic"
+    });
+
+    // Inside the conversations, the user will click on a certain conversation
+    // I must update the conversation variable (the one that tells me to whom I
+    // am talking right now, and pass it to the messages.
+    // Inside messages, I will get all the messages that belong to that conversation
+    // from the backend server
+    return (
+        <body className={'feed'}>
+            <div className={'messagewindow'}>
+                <Messages user={user} conversation={conversation}/>
+                <TypeBar />
+                <Conversations user={user} setConversation={setConversation}/>
+            </div>
+        </body>
+    )
 }
 
 export default Feed;

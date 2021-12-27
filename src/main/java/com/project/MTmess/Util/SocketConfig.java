@@ -11,14 +11,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker // allows it to listen / send info to ports
 public class SocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    @Override
+    public void configureMessageBroker(@NotNull MessageBrokerRegistry registry){ // MessageHandler
+        registry.enableSimpleBroker("/topic", "/queue");
+        registry.setApplicationDestinationPrefixes("/app");
+    }
+
     // Overriding default methods to set custom directory endpoints
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry){
         registry.addEndpoint("/chat").setAllowedOriginPatterns("*").withSockJS();
-    }
-
-    @Override
-    public void configureMessageBroker(@NotNull MessageBrokerRegistry registry){ // MessageHandler
-        registry.setApplicationDestinationPrefixes("/app").enableSimpleBroker("/topic", "/queue");
     }
 }
