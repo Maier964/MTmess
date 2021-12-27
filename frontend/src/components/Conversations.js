@@ -18,13 +18,13 @@ const conversations = [
     }
 ]
 
-const Conversations = ({ user, setConversation }) => {
+const Conversations = ({ user, setConversation }, stompClient) => {
     return (
         <div className={'conversations'}>
             {
                 conversations.length > 0 ?
                     conversations.map((conversation) => (
-                    <Conversation conversation={conversation} setConversation={setConversation}/>
+                    <Conversation conversation={conversation} setConversation={setConversation} stompClient={stompClient}/>
                     )) :
                     "You currently don't have any conversations"
             }

@@ -1,9 +1,8 @@
-// import React, {Component, useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Feed from './components/feed';
 import Login from './components/login';
 import Register from './components/register'
-import { useState, useEffect } from 'react'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App () {
@@ -30,14 +29,14 @@ function App () {
   return (   <div className='App'>
   <Login/>
 </div> );*/
+  var stompClient = null;
   return (
-
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login/>}/>
           <Route  path="/register" element={<Register/>}/>
-          <Route path="/feed" element={<Feed/>} isPrivate/>
+          <Route path="/feed" element={<Feed stompClient={stompClient}/>} isPrivate/>
           <Route element={<Login/>}/>
         </Routes>
       </BrowserRouter>

@@ -30,7 +30,7 @@ const messages = [
 // Messages to be loaded from the specific conversation
 // A prop 'conversation' should also be passed
 const Messages = ({ user, conversation }) => {
-    // console.log(conversation.name);
+    console.log(conversation.name);
     return (
         <div className={'messages'}>
             {
