@@ -30,11 +30,11 @@ const messages = [
 // Messages to be loaded from the specific conversation
 // A prop 'conversation' should also be passed
 const Messages = ({ user, conversation }) => {
-    console.log(conversation.name);
+    // console.log(conversation.name);
     return (
         <div className={'messages'}>
             {
-                messages.length > 0 ?
+                messages.length > 0 && conversation.name === "Brad" ?
                     messages.map((message) => (
                         message.sender === user ?
                             <Message message={message} sent={true}/> :

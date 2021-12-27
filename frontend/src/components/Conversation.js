@@ -5,7 +5,7 @@ const Conversation = ({ conversation, setConversation}) => {
     // can be passed to the messages
     // We do this by setConversation
     return (
-        <div className={"conversation"} onDoubleClick={setConversation(conversation)}>
+        <div className={"conversation"} onDoubleClick={() => setConversation(conversation)}>
             <h2 className={"conversation_name"}>
                 {conversation.name}
             </h2>

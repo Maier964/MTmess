@@ -116,8 +116,7 @@
 
 .message.sent {
 /*  position: absolute;*/
-  position: relative;
-  left: 0px;
+  right: 0px;
   padding: 1%;
   min-height: 5%;
   width: 33.3%;
@@ -128,6 +127,7 @@
 
 .message.received {
 /*  position: absolute;*/
+  left: 0px;
   padding: 1%;
   min-height: 5%;
   width: 33.3%;
