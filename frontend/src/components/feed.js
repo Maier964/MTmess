@@ -1,58 +1,4 @@
-/*import * as React from 'react';
-import SockJsClient from "react-stomp";
-import { TalkBox } from "react-talk";
-
-class Feed extends React.Component{
-    constructor(props) {
-      super(props);
-      // Need to assign user information for TalkBox render
-      this.userName = "Jackson";
-      this.userId = "123";
-      this.state = {
-        clientConnected: false,
-        messages: []
-      };
-    }
-
-    onMessageReceive = (message, topic) => {
-      this.setState( prevState => (
-        {
-          messages: [...prevState.messages, message]
-        }
-       ) );
-    }
-
-    sendMessage = (message, selfMessage) => {
-      try {
-        this.clientRef.sendMessage("/app/chat/" + this.userName, JSON.stringify(selfMessage));
-        return true;
-      }
-      catch (exp){
-        return false;
-      }
-    }
-
-    render() {
-      const wsSourceUrl = window.location.protocol + "//" + window.location.host + "/chat";
-      return (
-        <div>
-        <TalkBox topic="messenger" currentUserId={ this.UserId }
-          currentUser={ this.UserName } messages={ this.state.messages }
-          onSendMessage={ this.sendMessage } connected={ this.state.clientConnected }/>
-
-        <SockJsClient url={ wsSourceUrl } topics={["/topic/messages"]}
-          onMessage={ this.onMessageReceive } ref={ (client) => { this.clientRef = client }}
-          onConnect={ () => { this.setState({ clientConnected: true }) } }
-          onDisconnect={ () => { this.setState({ clientConnected: false }) } }
-          debug={ true }/>
-      </div>
-      );
-    }
-
-}
-
-export default Feed;*/
-import SockJS from 'sockjs-client'; 
+import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import TypeBar from './TypeBar';
 import Messages from "./Messages";
@@ -63,9 +9,9 @@ import Button from '@mui/material/Button';
 
 // For testing, this should come from backend
 // The user should be received by the feed as a prop
-const user = "Thomas";
+/*const user = "Thomas";*/
 
-const Feed = (stompClient) => {
+const Feed = ({ user, stompClient }) => {
 
     // For testing, this should come from backend
     // The conversation tells me to whom the current user is talking right now
@@ -74,14 +20,15 @@ const Feed = (stompClient) => {
         name: "Generic"
     });
 
+    console.log(user)
 
-    const socketInit = () => { 
+    const socketInit = () => {
 
-      // Using SockJS over Stomp 
+      // Using SockJS over Stomp
       var mySocket = new SockJS('http://localhost:8080/chat/' );
       stompClient = Stomp.over(mySocket);
 
-      stompClient.connect( {username:user} , function(frame) { 
+      stompClient.connect( {username:user} , function(frame) {
           // setConnected(true);
           console.log('Connected '+ frame);
           stompClient.subscribe('topic/messages/' + user, function(messageOutput)

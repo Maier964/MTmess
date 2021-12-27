@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class UserController {
 
+    // Dependency injection of UserService object
+    // We will have a UserService object which is created somewhere else
     @Autowired
     private UserService userService;
 
+    // Method that lets the user send a request to the server for adding a specific user
+    // Receives a parameter of type UserEntity in the body of the request, in JSON format
     @PostMapping("/add")
     public String add(@RequestBody UserEntity user){
         try {
+            // Hashes the password that was given by the user in the request
             user.setHashedpassword( user.getHash( user.getHashedpassword() ) );
             userService.saveUser(user);
             return "User was added!";  // TO BE IMPLEMENTED: if user already exists, don't print this
@@ -26,11 +31,15 @@ public class UserController {
         }
     }
 
+    // Pass in the name as a parameter in the url to see if the user exists in the database
+    // If they exist you'll get them, if they don't you'll get an empty page, but still code 200
     @GetMapping("/find")
     public ResponseEntity<UserEntity> getUserByName(@RequestParam String name){
         return new ResponseEntity<>(userService.findByName(name), HttpStatus.OK);
     }
 
+    // Pass in the name and password (not hashed) as parameters in the url to see if the user exists in the database
+    // If they exist you'll get them, if they don't you'll get an empty page, but still code 200
     @GetMapping("/find/log")
     public ResponseEntity<UserEntity> findByNameAndHashedpassword(@RequestParam String name, @RequestParam String password){
         return new ResponseEntity<>(userService.findByNameAndHashedpassword(name,password), HttpStatus.OK);

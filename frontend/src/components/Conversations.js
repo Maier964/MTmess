@@ -18,7 +18,7 @@ const conversations = [
     }
 ]
 
-const Conversations = ({ user, setConversation }, stompClient) => {
+const Conversations = ({ user, setConversation , stompClient}) => {
     return (
         <div className={'conversations'}>
             {
