@@ -15,7 +15,7 @@ function App () {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login user={user} setUser={setUser}/>}/>
+          <Route path="/" element={<Login setUser={setUser}/>}/>
           <Route  path="/register" element={<Register/>}/>
           <Route path="/feed" element={<Feed user={user} stompClient={stompClient}/>} isPrivate/>
           <Route element={<Login/>}/>

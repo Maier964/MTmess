@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-/*import { useHistory } from 'react-router-dom'*/
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core';
 import  AddReaction  from '@mui/icons-material/AddReaction';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -8,9 +6,9 @@ import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Typography, AvatarGroup, Link } from '@mui/material';
-import Feed from "./feed";
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ user, setUser }) => {
+const Login = ({ setUser }) => {
 
     const buttonStyle = {
         margin:'55px 0'
@@ -29,29 +27,22 @@ const Login = ({ user, setUser }) => {
         margin:"40px 60px"
     }
 
-    // const routeHandle = () => {
-    //     let navigate = useNavigate();
-    //     navigate('/feed');
-    // }
+    
+    let navigate = useNavigate();
+    
 
     const [ok, setOk] = useState(false);
     const [name,setName]=useState('');
     const [password,setPassword]=useState('');
 
-    const clickHandler = async (e) => {
-        e.preventDefault()
+    const clickHandler = async () => {
         const response = await fetch(`http://localhost:8080/user/find/log?name=${name}&password=${password}`)
         try {
             const data = await response.json()
             /*console.log(data)*/
             setOk(true);
-            /*console.log("Before" + user);*/
-            const set = () => {
-                setUser(name)
-            }
-            set();
-            /*console.log("After" + user);*/
-            window.location = "/"
+            setUser(name);
+            navigate('/feed');
         }
         catch {
             alert("Incorrect credentials!")
@@ -73,7 +64,7 @@ const Login = ({ user, setUser }) => {
                             type='submit'
                             color='primary'
                             fullwidth={true}
-                            style={buttonStyle} onClick={clickHandler}> Sign in </Button>
+                            style={buttonStyle} onClick={() => clickHandler()}> Sign in </Button>
                 </Grid>
 
                 <Typography>
