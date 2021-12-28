@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 
 const TypeBar = ({ user, conversation, stompClient }) => {
 
+    console.log(conversation)
 
     const sendMessage = (e) => {
         // Fetch the message using plain DOM manipulation
@@ -14,7 +15,7 @@ const TypeBar = ({ user, conversation, stompClient }) => {
             sender: user,
             receiver: conversation.name
         })
-        stompClient.send("/app/chat/" + conversation.name, {}, content );
+        stompClient.send("/app/chat/" + conversation, {}, content );
 
         console.log(content);
     }

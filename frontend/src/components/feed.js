@@ -6,21 +6,42 @@ import Conversations from "./Conversations";
 import { useState, useEffect } from 'react'
 import Button from '@mui/material/Button';
 
-
-// For testing, this should come from backend
-// The user should be received by the feed as a prop
-/*const user = "Thomas";*/
-
 const Feed = ({ user, stompClient }) => {
+
+    console.log(user);
+
+    // For saving the names of all the user's friends
+    // This should be an array of strings that represent usernames
+    const [friendships, setFriendships] = useState([]);
+
 
     // For testing, this should come from backend
     // The conversation tells me to whom the current user is talking right now
-    const [conversation, setConversation] = useState({
+    const [conversation, setConversation] = useState([{
         id: 80,
         name: "Generic"
-    });
+    }]);
 
-    console.log(user)
+    useEffect(() => {
+        const getFriendships = async () => {
+            const data = await fetchFriendships()
+            let aux = [];
+            data.map((data) => aux = [...aux, data.user2]);
+            setFriendships(aux);
+        }
+        getFriendships()
+    }, [])
+
+    const fetchFriendships = async () => {
+        const response = await fetch(`http://localhost:8080/friendship/find?user1=${user}&user2=`)
+        try {
+            const data = await response.json()
+            return data
+        }
+        catch {
+            alert("You don't have any friends")
+        }
+    }
 
     const socketInit = () => {
 
@@ -30,16 +51,16 @@ const Feed = ({ user, stompClient }) => {
 
       stompClient.connect( {username:user} , function(frame) {
           // setConnected(true);
-          console.log('Connected '+ frame);
+/*          console.log('Connected '+ frame);*/
           stompClient.subscribe('topic/messages/' + user, function(messageOutput)
           { showMessageOutput(JSON.parse(messageOutput.body)); });
        } );
 
-       console.log(stompClient);
+/*       console.log(stompClient);*/
   }
 
   const showMessageOutput= (messageOutput) => {
-      console.log(messageOutput); // for now
+/*      console.log(messageOutput); // for now*/
   }
 
   socketInit();
@@ -54,7 +75,7 @@ const Feed = ({ user, stompClient }) => {
             <div className={'messagewindow'}>
                 <Messages user={user} conversation={conversation} stompClient={stompClient}/>
                 <TypeBar user={user} conversation={conversation} stompClient={stompClient}/>
-                <Conversations user={user} setConversation={setConversation} stompClient={stompClient}/>
+                <Conversations setConversation={setConversation} friendships={friendships} stompClient={stompClient}/>
             </div>
         </body>
     )

@@ -9,7 +9,7 @@ import {useState} from 'react';
 function App () {
   var stompClient = null;
 
-  const [user, setUser] = useState('Thomas');
+  const [user, setUser] = useState('Maier');
 
   return (
     <>

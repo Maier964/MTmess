@@ -1,30 +1,13 @@
 import Conversation from "./Conversation";
 
-// For testing, this should come from backend
-// Here I should take all the names of the people
-// with which the current user has any messages with
-const conversations = [
-    {
-        id: 1,
-        name: 'Brad'
-    },
-    {
-        id: 2,
-        name: 'Jess'
-    },
-    {
-        id: 3,
-        name: 'Roy'
-    }
-]
-
-const Conversations = ({ user, setConversation , stompClient}) => {
+const Conversations = ({ setConversation, friendships }) => {
+    console.log("Conversations: " + friendships + " Length: " + friendships.length)
     return (
-        <div className={'conversations'}>
+        <div className={'friendships'}>
             {
-                conversations.length > 0 ?
-                    conversations.map((conversation) => (
-                    <Conversation conversation={conversation} setConversation={setConversation} stompClient={stompClient}/>
+                friendships.length > 0 ?
+                    friendships.map((friendship) => (
+                    <Conversation friendship={friendship} setConversation={setConversation}/>
                     )) :
                     "You currently don't have any conversations"
             }
