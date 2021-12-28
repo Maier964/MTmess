@@ -11,13 +11,17 @@ const Feed = ({ user}) => {
 
     const [stompClient, setStompClient] = useState([{}]);
 
-    console.log(user);
+    // console.log(user);
 
     // For saving the names of all the user's friends
     // This should be an array of strings that represent usernames
     const [friendships, setFriendships] = useState([]);
 
-    const [messages, setMessages] = useState([{}]); // array of json
+    const [messages, setMessages] = useState([{
+        content:"",
+        sender:"",
+        receiver:""
+    }]); // array of json
 
 
     // For testing, this should come from backend
@@ -47,22 +51,27 @@ const Feed = ({ user}) => {
             // setConnected(true);
   /*          console.log('Connected '+ frame);*/
             aux.subscribe('/topic/messages/' + user, function(messageOutput)
-            { showMessageOutput(JSON.parse(messageOutput.body)); });
+            { 
+                showMessageOutput(messageOutput.body); 
+            });
          } );
-         console.log("From socket init : "  + aux);
+        //  console.log("From socket init : "  + aux);
          setStompClient(aux);
     }
   
     const showMessageOutput= (messageOutput) => {
-    setMessages( prevMessages => [...prevMessages, messageOutput]  ); // here we should set message array to contain the message. 
-    console.log(messageOutput.content);
+    //setMessages( prevMessages => [...prevMessages, messageOutput]  ); // here we should set message array to contain the message. 
+    
+    console.log("Before : " + messages);
+    setMessages( [...messages, messageOutput] );
+    console.log(" After :  " + messages);
   }
 
 
   useEffect(() => {
     socketInit(); // This effect will make socketInit run only once, because it has an empty dependency array. 
     // (Otherwise the function will run every time something form the array changes state)
-    console.log(stompClient)
+    // console.log(stompClient)
 }, []);
 
 
