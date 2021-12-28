@@ -1,5 +1,7 @@
 package com.project.MTmess.Controller;
 
+import com.project.MTmess.Exception.InvalidFriendshipException;
+import com.project.MTmess.Exception.SelfFriendshipException;
 import com.project.MTmess.Model.FriendshipEntity;
 import com.project.MTmess.Service.FriendshipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,22 @@ public class FriendshipController {
 
     @PostMapping("/add")
     public String add(@RequestBody FriendshipEntity friendship){
-        friendshipService.saveFriendship(friendship);
-        String user1copy = friendship.getUser1();
-        String user2copy = friendship.getUser2();
-        FriendshipEntity friendshipCopy = new FriendshipEntity(user2copy, user1copy);
-        friendshipService.saveFriendship(friendshipCopy);
-        return "Added friend!";
+        try{
+            friendshipService.saveFriendship(friendship);
+            String user1copy = friendship.getUser1();
+            String user2copy = friendship.getUser2();
+            FriendshipEntity friendshipCopy = new FriendshipEntity(user2copy, user1copy);
+            friendshipService.saveFriendship(friendshipCopy);
+
+            return "Added friend!";
+        }
+        catch ( InvalidFriendshipException e) {
+            return "Error : Users don't exist!";
+        }
+        catch ( SelfFriendshipException e){
+            return "Error : User1 is the same with User2!";
+        }
+
     }
 
     @GetMapping("/find")

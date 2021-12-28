@@ -1,12 +1,7 @@
 import Button from '@mui/material/Button';
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
-import { useState, useEffect, useRef } from 'react'
 
 
 const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
-
-    var msgCounter = 0;
  
 
     const sendMessage = () => {
@@ -27,7 +22,7 @@ const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
 
         var toSend = ({
             sender : user,
-            reveiver: conversation,
+            receiver: conversation,
             content: message
         })
 
@@ -35,10 +30,23 @@ const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
         
         setMessages(messages => [...messages, toSend]);
 
-        // Reset the input button
-        document.getElementById("InputId").setAttribute("value", "");
 
-        // Add message to Database
+        // Reset the input button
+        document.getElementById("InputId").value = ""
+
+        // Add message to Database ( should always work so no error checking/handling here )
+        
+        // Forge request
+        const request = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( { sender:user , receiver:conversation, content:message } )
+        };
+
+        // Send request
+        fetch('http://localhost:8080/message/add', request)
+            .then( console.log("Added message to db...") )
+
     }
 
     return (

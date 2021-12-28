@@ -1,5 +1,8 @@
 package com.project.MTmess.Model;
 
+import com.project.MTmess.Exception.InvalidFriendshipException;
+import org.springframework.web.client.RestTemplate;
+
 import javax.persistence.*;
 
 @Table(name = "Friendships")
@@ -38,9 +41,7 @@ public class FriendshipEntity {
         return user1;
     }
 
-    public void setUser1(String user1) {
-        this.user1 = user1;
-    }
+    public void setUser1(String user1){ this.user1 = user1;}
 
     public String getUser2() {
         return user2;

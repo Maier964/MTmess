@@ -1,5 +1,6 @@
 package com.project.MTmess.Controller;
 
+import com.project.MTmess.Exception.InvalidMessageException;
 import com.project.MTmess.Model.MessageEntity;
 import com.project.MTmess.Service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,14 @@ public class MessageController {
 
     @PostMapping("/add")
     public String add(@RequestBody MessageEntity message){
-        messageService.saveMessage(message);
+
+        try{
+            messageService.saveMessage(message);
+        }
+        catch( InvalidMessageException e){
+            return " Sender or Receiver are not friends! ";
+        }
+
         return "Message was added";
     }
 
