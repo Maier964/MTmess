@@ -14,6 +14,8 @@ const Feed = ({ user, stompClient }) => {
     // This should be an array of strings that represent usernames
     const [friendships, setFriendships] = useState([]);
 
+    const [messages, setMessages] = useState([{}]); // array of json
+
 
     // For testing, this should come from backend
     // The conversation tells me to whom the current user is talking right now
@@ -43,29 +45,10 @@ const Feed = ({ user, stompClient }) => {
         }
     }
 
-    const socketInit = () => {
 
-      // Using SockJS over Stomp
-      var mySocket = new SockJS('http://localhost:8080/chat/' );
-      stompClient = Stomp.over(mySocket);
 
-      stompClient.connect( {username:user} , function(frame) {
-          // setConnected(true);
-/*          console.log('Connected '+ frame);*/
-          stompClient.subscribe('topic/messages/' + user, function(messageOutput)
-          { showMessageOutput(JSON.parse(messageOutput.body)); });
-       } );
 
-/*       console.log(stompClient);*/
-  }
-
-  const showMessageOutput= (messageOutput) => {
-/*      console.log(messageOutput); // for now*/
-  }
-
-  socketInit();
-
-    // Inside the conversations, the user will click on a certain conversation
+// Inside the conversations, the user will click on a certain conversation
     // I must update the conversation variable (the one that tells me to whom I
     // am talking right now, and pass it to the messages.
     // Inside messages, I will get all the messages that belong to that conversation
@@ -73,8 +56,8 @@ const Feed = ({ user, stompClient }) => {
     return (
         <body className={'feed'}>
             <div className={'messagewindow'}>
-                <Messages user={user} conversation={conversation} stompClient={stompClient}/>
-                <TypeBar user={user} conversation={conversation} stompClient={stompClient}/>
+                <Messages user={user} conversation={conversation} stompClient={stompClient} messages={messages}/>
+                <TypeBar user={user} conversation={conversation} stompClient={stompClient} setMessages={setMessages}/>
                 <Conversations setConversation={setConversation} friendships={friendships} stompClient={stompClient}/>
             </div>
         </body>

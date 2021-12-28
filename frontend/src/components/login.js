@@ -64,7 +64,7 @@ const Login = ({ setUser }) => {
                             type='submit'
                             color='primary'
                             fullwidth={true}
-                            style={buttonStyle} onClick={() => clickHandler()}> Sign in </Button>
+                            style={buttonStyle} onClick={() => clickHandler()}> 'Log in'  </Button>
                 </Grid>
 
                 <Typography>
