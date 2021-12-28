@@ -14,14 +14,31 @@ const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
         var message = document.getElementById("InputId").value;
 
         var content = JSON.stringify({
-            content: message,
             sender: user,
-            receiver: conversation
+            receiver: conversation,
+            content: message
         })
 
         stompClient.send("/app/chat/" + conversation, {}, content );
 
-        msgCounter = msgCounter + 1;
+        // Add message to message array in order to print it on screen
+
+       
+
+        var toSend = ({
+            sender : user,
+            reveiver: conversation,
+            content: message
+        })
+
+        console.log("Content is : " + toSend)
+        
+        setMessages(messages => [...messages, toSend]);
+
+        // Reset the input button
+        document.getElementById("InputId").setAttribute("value", "");
+
+        // Add message to Database
     }
 
     return (

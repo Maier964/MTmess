@@ -120,8 +120,9 @@
   min-height: 5%;
   width: 33.3%;
   background-color: palegreen;
-  text-align: left;
+  text-align: right;
   box-sizing: border-box;
+  
 }
 
 .message.received {
@@ -131,8 +132,6 @@
   min-height: 5%;
   width: 33.3%;
   background-color: antiquewhite;
-  text-align: right;
+  text-align: left;
   box-sizing: border-box;
 }
-
-

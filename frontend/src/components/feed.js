@@ -17,11 +17,13 @@ const Feed = ({ user}) => {
     // This should be an array of strings that represent usernames
     const [friendships, setFriendships] = useState([]);
 
-    const [messages, setMessages] = useState([{
-        content:"",
-        sender:"",
-        receiver:""
-    }]); // array of json
+    const [messages, setMessages] = useState([
+        {
+        sender: " ",
+        receiver: " ",
+        content: " "
+        }
+    ]); // array of objects
 
 
     // For testing, this should come from backend
@@ -52,7 +54,7 @@ const Feed = ({ user}) => {
   /*          console.log('Connected '+ frame);*/
             aux.subscribe('/topic/messages/' + user, function(messageOutput)
             { 
-                showMessageOutput(messageOutput.body); 
+                showMessageOutput(JSON.parse(messageOutput.body)); 
             });
          } );
         //  console.log("From socket init : "  + aux);
@@ -60,11 +62,12 @@ const Feed = ({ user}) => {
     }
   
     const showMessageOutput= (messageOutput) => {
-    //setMessages( prevMessages => [...prevMessages, messageOutput]  ); // here we should set message array to contain the message. 
-    
-    console.log("Before : " + messages);
-    setMessages( [...messages, messageOutput] );
-    console.log(" After :  " + messages);
+    //setMessages( prevMessages => [...prevMessages, messageOutput]  ); // here we should set message array to contain the message.
+    console.log("Before " + messages.content);
+
+    setMessages(messages => [...messages, messageOutput]);
+
+    console.log("After " + messages.content);
   }
 
 

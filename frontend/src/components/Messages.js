@@ -34,7 +34,7 @@ const Messages = ({ user, conversation, stompClient, messages }) => {
     return (
         <div className={'messages'}>
             {
-                messages.length > 0 && conversation.name === "Brad" ?  // change this
+                messages.length > 0 ?  // change this
                     messages.map((message) => (
                         message.sender === user ?
                             <Message message={message} sent={true}/> :
