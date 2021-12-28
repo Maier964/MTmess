@@ -7,7 +7,9 @@ import Stomp from 'stompjs';
 
 const Feed = ({ user}) => {
 
-    var stompClient = null;
+    var aux = null;
+
+    const [stompClient, setStompClient] = useState([{}]);
 
     console.log(user);
 
@@ -39,14 +41,16 @@ const Feed = ({ user}) => {
     const socketInit = () => {
         // Using SockJS over Stomp
         var mySocket = new SockJS('http://localhost:8080/chat/' );
-        stompClient = Stomp.over(mySocket);
+        aux = Stomp.over(mySocket);
   
-        stompClient.connect( {username:user} , function(frame) {
+        aux.connect( {username:user} , function(frame) {
             // setConnected(true);
   /*          console.log('Connected '+ frame);*/
-            stompClient.subscribe('/topic/messages/' + user, function(messageOutput)
+            aux.subscribe('/topic/messages/' + user, function(messageOutput)
             { showMessageOutput(JSON.parse(messageOutput.body)); });
          } );
+         console.log("From socket init : "  + aux);
+         setStompClient(aux);
     }
   
     const showMessageOutput= (messageOutput) => {
@@ -58,6 +62,7 @@ const Feed = ({ user}) => {
   useEffect(() => {
     socketInit(); // This effect will make socketInit run only once, because it has an empty dependency array. 
     // (Otherwise the function will run every time something form the array changes state)
+    console.log(stompClient)
 }, []);
 
 
