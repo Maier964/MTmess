@@ -1,12 +1,13 @@
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
 import TypeBar from './TypeBar';
 import Messages from "./Messages";
 import Conversations from "./Conversations";
 import { useState, useEffect } from 'react'
-import Button from '@mui/material/Button';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 
-const Feed = ({ user, stompClient }) => {
+const Feed = ({ user}) => {
+
+    var stompClient = null;
 
     console.log(user);
 
@@ -34,6 +35,32 @@ const Feed = ({ user, stompClient }) => {
         getFriendships()
     }, [])
 
+
+    const socketInit = () => {
+        // Using SockJS over Stomp
+        var mySocket = new SockJS('http://localhost:8080/chat/' );
+        stompClient = Stomp.over(mySocket);
+  
+        stompClient.connect( {username:user} , function(frame) {
+            // setConnected(true);
+  /*          console.log('Connected '+ frame);*/
+            stompClient.subscribe('/topic/messages/' + user, function(messageOutput)
+            { showMessageOutput(JSON.parse(messageOutput.body)); });
+         } );
+    }
+  
+    const showMessageOutput= (messageOutput) => {
+    setMessages( prevMessages => [...prevMessages, messageOutput]  ); // here we should set message array to contain the message. 
+    console.log(messageOutput.content);
+  }
+
+
+  useEffect(() => {
+    socketInit(); // This effect will make socketInit run only once, because it has an empty dependency array. 
+    // (Otherwise the function will run every time something form the array changes state)
+}, []);
+
+
     const fetchFriendships = async () => {
         const response = await fetch(`http://localhost:8080/friendship/find?user1=${user}&user2=`)
         try {
@@ -57,7 +84,7 @@ const Feed = ({ user, stompClient }) => {
         <body className={'feed'}>
             <div className={'messagewindow'}>
                 <Messages user={user} conversation={conversation} stompClient={stompClient} messages={messages}/>
-                <TypeBar user={user} conversation={conversation} stompClient={stompClient} setMessages={setMessages}/>
+                <TypeBar user={user} conversation={conversation} setMessages={setMessages} stompClient={stompClient}/>
                 <Conversations setConversation={setConversation} friendships={friendships} stompClient={stompClient}/>
             </div>
         </body>

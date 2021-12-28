@@ -7,8 +7,8 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import {useState} from 'react';
 
 function App () {
-  var stompClient = null;
 
+ // var stompClient = null; 
   const [user, setUser] = useState('Maier');
 
   return (
@@ -17,7 +17,7 @@ function App () {
         <Routes>
           <Route path="/" element={<Login setUser={setUser}/>}/>
           <Route  path="/register" element={<Register/>}/>
-          <Route path="/feed" element={<Feed user={user} stompClient={stompClient}/>} isPrivate/>
+          <Route path="/feed" element={<Feed user={user}/>} isPrivate/>
           <Route element={<Login/>}/>
         </Routes>
       </BrowserRouter>
