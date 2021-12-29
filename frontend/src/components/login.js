@@ -27,14 +27,11 @@ const Login = ({ setUser }) => {
         margin:"40px 60px"
     }
 
-    
     let navigate = useNavigate();
-    
 
     const [ok, setOk] = useState(false);
     const [name,setName]=useState('');
     const [password,setPassword]=useState('');
-
 
     const clickHandler = async () => {
         const response = await fetch(`http://localhost:8080/user/find/log?name=${name}&password=${password}`)
@@ -49,9 +46,6 @@ const Login = ({ setUser }) => {
             alert("Incorrect credentials!")
         }
     }
-
-
-    
 
     return(
         <Grid>

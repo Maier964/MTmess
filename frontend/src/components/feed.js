@@ -1,3 +1,5 @@
+import ConversationBar from "./ConversationBar";
+import UserBar from './UserBar'
 import TypeBar from './TypeBar';
 import Messages from "./Messages";
 import Conversations from "./Conversations";
@@ -5,17 +7,24 @@ import { useState, useEffect } from 'react'
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 
-const Feed = ({ user}) => {
+// In order of priority
+/** TODO 1: IMPLEMENT SCROLL ON THE MESSAGES PAGE*/
+/** TODO 2: PERSIST STATE OF CURRENT USER AND CONVERSATION UPON RELOADING THE PAGE */
+/** TODO 3: DISPLAY ONLY THE FRIENDS WITH WHICH THE USER HAS AT LEAS ONE MESSAGE */
+/** TODO 4: CHANGE THE MATERIAL UI BUTTON BECAUSE IT DOESN'T RESIZE*/
+/** TODO 5: LINE 64*/
+/** TODO 6: LINE 83*/
 
-    var aux = null;
+const Feed = ({ user }) => {
+
+    console.log("User: " + user);
+
+    let aux = null;
 
     const [stompClient, setStompClient] = useState([{}]);
 
-    // console.log(user);
-
-    // For saving the names of all the user's friends
-    // This should be an array of strings that represent usernames
-    const [friendships, setFriendships] = useState([]);
+    // Array of strings that represent all the friends of the current ${user}
+    const [friends, setFriends] = useState([]);
 
     const [messages, setMessages] = useState([
         {
@@ -25,84 +34,91 @@ const Feed = ({ user}) => {
         }
     ]); // array of objects
 
+    // The conversation tells me to whom the current user want to talk to
+    // Whenever the user clicks on the name of a person, this state will
+    // be set to the name of that person
+    // The initial state is a random string of characters that represents
+    // the fact that no conversation has yet to be selected by the user
+    const [conversation, setConversation] = useState("y!MVd(DA*x3@&fw");
 
-    // For testing, this should come from backend
-    // The conversation tells me to whom the current user is talking right now
-    const [conversation, setConversation] = useState([{
-        id: 80,
-        name: "Generic"
-    }]);
 
+    /** FETCHING FROM DATABASE */
+    // Friends
+    // Get the friends of the current ${user} once
     useEffect(() => {
-        const getFriendships = async () => {
-            const data = await fetchFriendships()
+        const getFriends = async () => {
+            const data = await fetchFriends()
             let aux = [];
             data.map((data) => aux = [...aux, data.user2]);
-            setFriendships(aux);
+            setFriends(aux);
         }
-        getFriendships()
+        getFriends()
     }, [])
 
-
-    const socketInit = () => {
-        // Using SockJS over Stomp
-        var mySocket = new SockJS('http://localhost:8080/chat/' );
-        aux = Stomp.over(mySocket);
-  
-        aux.connect( {username:user} , function(frame) {
-            // setConnected(true);
-  /*          console.log('Connected '+ frame);*/
-            aux.subscribe('/topic/messages/' + user, function(messageOutput)
-            { 
-                showMessageOutput(JSON.parse(messageOutput.body)); 
-            });
-         } );
-        //  console.log("From socket init : "  + aux);
-         setStompClient(aux);
-    }
-  
-    const showMessageOutput= (messageOutput) => {
-    //setMessages( prevMessages => [...prevMessages, messageOutput]  ); // here we should set message array to contain the message.
-    console.log("Before " + messages.content);
-
-    setMessages(messages => [...messages, messageOutput]);
-
-    console.log("After " + messages.content);
-  }
-
-
-  useEffect(() => {
-    socketInit(); // This effect will make socketInit run only once, because it has an empty dependency array. 
-    // (Otherwise the function will run every time something form the array changes state)
-    // console.log(stompClient)
-}, []);
-
-
-    const fetchFriendships = async () => {
+    const fetchFriends = async () => {
         const response = await fetch(`http://localhost:8080/friendship/find?user1=${user}&user2=`)
         try {
             const data = await response.json()
             return data
         }
         catch {
-            alert("You don't have any friends")
+            alert("You don't have any friends")  /** TODO 5: REMOVE TRY CATCH */
         }
     }
 
+    // Messages
+    // Get the messages of the current ${user} with ${conversation} every time ${conversation} changes
+    useEffect(() => {
+        const getMessages = async () => {
+            const data = await fetchMessages(conversation); // all the messages with ${conversation}
+            let aux = [];
+            data.map((data) => aux = [...aux, data]);
+            setMessages(aux);  // each message contains 3 fields, sender, receiver and content
+        }
+        getMessages()
+    }, [conversation])
 
+    // Fetch messages of current user with ${conversation}
+    const fetchMessages = async (conversation) => {
+        /** TODO 6: CHECK FOR ERROR UPON RETRIEVING THE DATA FROM BACKEND */
+        const response = await fetch(`http://localhost:8080/message/find/and?user1=${user}&user2=${conversation}`);
+        const data = await response.json();
+        return data
+    }
 
+    /** SOCKETS */
+    const socketInit = () => {
+        // Using SockJS over Stomp
+        let mySocket = new SockJS('http://localhost:8080/chat/' );
+        aux = Stomp.over(mySocket);
 
-// Inside the conversations, the user will click on a certain conversation
-    // I must update the conversation variable (the one that tells me to whom I
-    // am talking right now, and pass it to the messages.
-    // Inside messages, I will get all the messages that belong to that conversation
-    // from the backend server
+        aux.connect( {username:user} , function(frame) {
+            aux.subscribe('/topic/messages/' + user, function(messageOutput)
+            {
+                showMessageOutput(JSON.parse(messageOutput.body));
+            });
+         } );
+         setStompClient(aux);
+    }
+
+    const showMessageOutput= (messageOutput) => {
+        setMessages(messages => [...messages, messageOutput]);
+    }
+
+    useEffect(() => {
+        socketInit(); // This effect will make socketInit run only once, because it has an empty dependency array.
+        // (Otherwise the function will run every time something form the array changes state)
+        // console.log(stompClient)
+    }, []);
+
     return (
         <body className={'feed'}>
             <div className={'messagewindow'}>
-                <Messages user={user} conversation={conversation} stompClient={stompClient} messages={messages}/>
+                <Messages user={user} conversation={conversation} messages={messages}/>
                 <TypeBar user={user} conversation={conversation} setMessages={setMessages} stompClient={stompClient}/>
-                <Conversations setConversation={setConversation} friendships={friendships} stompClient={stompClient}/>
+                <Conversations setConversation={setConversation} friends={friends} stompClient={stompClient}/>
+                <UserBar user={user}/>
+                <ConversationBar conversation={conversation}/>
             </div>
         </body>
     )

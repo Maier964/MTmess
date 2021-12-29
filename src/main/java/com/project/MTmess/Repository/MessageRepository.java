@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<MessageEntity, Integer> {
     List<MessageEntity> findAllBySenderOrReceiver(String sender, String receiver);
+    List<MessageEntity> findAllBySenderAndReceiverOrReceiverAndSender(String user11, String user12, String user21, String user22);
 }

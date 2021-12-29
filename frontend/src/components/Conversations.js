@@ -1,13 +1,15 @@
 import Conversation from "./Conversation";
 
-const Conversations = ({ setConversation, friendships }) => {
-    console.log("Conversations: " + friendships + " Length: " + friendships.length)
+const Conversations = ({ setConversation, friends }) => {
+
+    console.log("Conversations: " + friends)
+
     return (
-        <div className={'friendships'}>
+        <div className={'friends'}>
             {
-                friendships.length > 0 ?
-                    friendships.map((friendship) => (
-                    <Conversation friendship={friendship} setConversation={setConversation}/>
+                friends.length > 0 ?
+                    friends.map((friend) => (
+                    <Conversation friend={friend} setConversation={setConversation}/>
                     )) :
                     "You currently don't have any conversations"
             }

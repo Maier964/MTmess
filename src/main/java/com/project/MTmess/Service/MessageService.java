@@ -8,4 +8,5 @@ import java.util.List;
 public interface MessageService {
     MessageEntity saveMessage( MessageEntity message) throws InvalidMessageException;
     List<MessageEntity> findAllBySenderOrReceiver(String sender, String receiver);
+    List<MessageEntity> findAllBySenderAndReceiverOrReceiverAndSender(String user11, String user12, String user21, String user22);
 }

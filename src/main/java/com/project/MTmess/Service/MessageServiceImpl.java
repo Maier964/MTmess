@@ -36,4 +36,9 @@ public class MessageServiceImpl implements MessageService {
     public List<MessageEntity> findAllBySenderOrReceiver(String sender, String receiver) {
         return messageRepository.findAllBySenderOrReceiver(sender, receiver);
     }
+
+    @Override
+    public List<MessageEntity> findAllBySenderAndReceiverOrReceiverAndSender(String user11, String user12, String user21, String user22) {
+        return messageRepository.findAllBySenderAndReceiverOrReceiverAndSender(user11, user12, user21, user22);
+    }
 }

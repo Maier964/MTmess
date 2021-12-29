@@ -1,16 +1,14 @@
-
-const Conversation = ({ friendship, setConversation}) => {
-
-    console.log("Conversation: " + friendship)
+const Conversation = ({ friend, setConversation}) => {
     // Here, the user should double-click on the conversation
     // The name of the user on which was clicked should
     // "propagate" back towards the feed page, so that it
     // can be passed to the messages
     // We do this by setConversation
+    console.log("Conversation: " + friend)
     return (
-        <h2 className={"friendship"} onDoubleClick={() => setConversation(friendship)}>
-            {friendship}
-        </h2>
+        <h3 className={"conversation"} onDoubleClick={() => setConversation(friend)}>
+            {friend}
+        </h3>
     )
 }
 

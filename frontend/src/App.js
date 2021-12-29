@@ -8,8 +8,7 @@ import {useState} from 'react';
 
 function App () {
 
- // var stompClient = null; 
-  const [user, setUser] = useState('Maier');
+  const [user, setUser] = useState();
 
   return (
     <>

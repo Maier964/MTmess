@@ -39,4 +39,13 @@ public class MessageController {
     {
         return new ResponseEntity<>(messageService.findAllBySenderOrReceiver(sender, receiver), HttpStatus.OK);
     }
+
+    @GetMapping("/find/and")
+    public ResponseEntity<List<MessageEntity>> findAllBySenderAndReceiverOrReceiverAndSender(
+            @RequestParam String user1,
+            @RequestParam String user2
+    )
+    {
+        return new ResponseEntity<>(messageService.findAllBySenderAndReceiverOrReceiverAndSender(user1, user2, user1, user2), HttpStatus.OK);
+    }
 }

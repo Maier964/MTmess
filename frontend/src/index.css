@@ -1,22 +1,22 @@
-/*body {*/
-/*  margin: 0;*/
-/*  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
-/*    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
-/*    sans-serif;*/
-/*  -webkit-font-smoothing: antialiased;*/
-/*  -moz-osx-font-smoothing: grayscale;*/
-/*}*/
-
-/*code {*/
-/*  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',*/
-/*    monospace;*/
-/*}*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
 * {
   padding: 0;
   margin: 0;
+}
+
+h2 {
+  padding-left: 1%;
+}
+
+h3 {
+  padding-left: 1%;
+}
+
+h4 {
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .feed {
@@ -32,7 +32,6 @@
   width: 80%;
   height: 80%;
   margin-top: 20px;
-  border: 1px solid black;
   position: relative;
   background-color: white;
 }
@@ -46,38 +45,49 @@
   bottom: 0px;
   right: 0px;
 
-  /*overflow: auto;*/
   border: 0px;
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
 
   background-color: azure;
-  /*background-color: #f4f4f4;*/
 }
 
 .typebar {
-  width: 64%;
+  background-color: white;
+  font: 16px Arial ;
+
+  box-sizing: border-box;
+/*  width: 64%;*/
+  width: 60%;
   height: 5%;
   min-height: 25px;
 
   position: absolute;
   bottom: 2.5%;
-  right: 1.35%;
+  right: 6%;
 
-  /*overflow: auto;*/
   border: 1px solid gray;
   border-radius: 1.5%;
   padding: 0px;
   margin: 0px;
-  box-sizing: border-box;
-
-  background-color: white;
-
-  font: 16px Arial ;
 }
 
-.friendships {
+/*Button:hover {
+
+  background-color: green;
+}*/
+
+.sendbutton {
+  height: 4.5%;
+  width: 4.5%;
+  min-height: 25px;
+  position: absolute;
+  bottom: 3%;
+  right: 1%;
+}
+
+.friends {
   height: 95%;
   width: 33.3%;
 
@@ -90,7 +100,7 @@
   background-color: #f4f4f4
 }
 
-.friendship {
+.conversation {
   font-size: 20px;
   font-family: Arial sans-serif;
   border-top: 0px;
@@ -115,23 +125,44 @@
 
 .message.sent {
 /*  position: absolute;*/
-  right: 0px;
-  padding: 1%;
+  right: 5px;
   min-height: 5%;
   width: 33.3%;
   background-color: palegreen;
   text-align: right;
   box-sizing: border-box;
-  
+  margin-bottom: 5px;
 }
 
 .message.received {
 /*  position: absolute;*/
-  left: 0px;
-  padding: 1%;
+  left: 5px;
   min-height: 5%;
   width: 33.3%;
   background-color: antiquewhite;
   text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+
+.conversationbar {
+  background-color: cornflowerblue;
+  position: absolute;
+  right: 0px;
+  width: 66.7%;
+  height: 5%;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.userbar {
+  background-color: lightskyblue;
+  position: absolute;
+  left: 0px;
+  width: 33.3%;
+  height: 5%;
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
