@@ -16,7 +16,7 @@ function App () {
         <Routes>
           <Route path="/" element={<Login setUser={setUser}/>}/>
           <Route  path="/register" element={<Register/>}/>
-          <Route path="/feed" element={<Feed user={user}/>} isPrivate/>
+          <Route path="/feed" element={<Feed user={user} setUser={setUser}/>} isPrivate/>
           <Route element={<Login/>}/>
         </Routes>
       </BrowserRouter>

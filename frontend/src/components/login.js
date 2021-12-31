@@ -53,7 +53,7 @@ const Login = ({ setUser }) => {
 
                 <Grid align='center'>
                     <Avatar style={avatarStyle}> <AddReaction/>  </Avatar>
-                    <h2 fullwidth={true}> MTmess </h2>
+                    <Typography variant="h4" fullwidth={true}> MTmess </Typography>
                     <TextField label='Username' placeholder='Enter username' fullwidth={true} required
                                value={name} onChange={(e)=>setName(e.target.value)}/>
                     <TextField label='Password' placeholder='Enter password' type='password' fullwidth={true} required

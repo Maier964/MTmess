@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
@@ -43,5 +45,11 @@ public class UserController {
     @GetMapping("/find/log")
     public ResponseEntity<UserEntity> findByNameAndHashedpassword(@RequestParam String name, @RequestParam String password){
         return new ResponseEntity<>(userService.findByNameAndHashedpassword(name,password), HttpStatus.OK);
+    }
+
+    // Fetch all entries in the user database
+    @GetMapping("/find/all")
+    public ResponseEntity<List<UserEntity>> findAll(){
+        return new ResponseEntity<>( userService.findAll() , HttpStatus.OK );
     }
 }

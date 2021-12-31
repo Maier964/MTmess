@@ -41,7 +41,7 @@ const Register = () => {
         <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
                     <Avatar style={avatarStyle}> <AddReaction/>  </Avatar>
-                    <h2 fullwidth={true}> MTmess </h2> 
+                    <Typography variant="h4" fullwidth={true}> MTmess </Typography>
 
             <TextField label='Username' placeholder='Enter username' fullwidth={true} required
             value={name} onChange={(e)=>setName(e.target.value)} /> {/* Using react hooks to save the name to the state variable */}

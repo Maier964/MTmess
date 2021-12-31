@@ -2,6 +2,7 @@ package com.project.MTmess.Repository;
 
 import com.project.MTmess.Model.UserEntity;
 import org.apache.catalina.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

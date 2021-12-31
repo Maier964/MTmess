@@ -15,7 +15,7 @@ import Stomp from 'stompjs';
 /** TODO 5: LINE 64*/
 /** TODO 6: LINE 83*/
 
-const Feed = ({ user }) => {
+const Feed = ({ user, setUser }) => {
 
     console.log("User: " + user);
 
@@ -111,13 +111,15 @@ const Feed = ({ user }) => {
         // console.log(stompClient)
     }, []);
 
+    // Persisting state on refresh
+
     return (
         <body className={'feed'}>
             <div className={'messagewindow'}>
                 <Messages user={user} conversation={conversation} messages={messages}/>
                 <TypeBar user={user} conversation={conversation} setMessages={setMessages} stompClient={stompClient}/>
                 <Conversations setConversation={setConversation} friends={friends} stompClient={stompClient}/>
-                <UserBar user={user}/>
+                <UserBar user={user} setFriends={setFriends}/>
                 <ConversationBar conversation={conversation}/>
             </div>
         </body>

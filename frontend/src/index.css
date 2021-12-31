@@ -97,7 +97,8 @@ h4 {
   box-sizing: border-box;
 
   background-color: azure;
-  background-color: #f4f4f4
+  background-color: #f4f4f4;
+  overflow-y: scroll;
 }
 
 .conversation {
@@ -120,6 +121,7 @@ h4 {
   right: 0px;
   box-sizing: border-box;
   background-image: url("./images/chat-background.jpg");
+  overflow-y: scroll;
 
 }
 
@@ -165,4 +167,15 @@ h4 {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+}
+
+
+#addButton{
+  position: relative; /* Fix this so the position is always in the right side of the UserBar */
+  left: 300px;
+}
+
+#AddFriend{
+  position: relative;
+  right: 3000px;
 }

@@ -37,4 +37,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByNameAndHashedpassword(name, hashed_password);
     }
 
+    public List<UserEntity> findAll(){
+        return userRepository.findAll();
+    }
 }
