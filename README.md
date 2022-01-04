@@ -78,7 +78,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
 ~~~
 
-### Operations as "add to database" don't need to be declared, since they are implicit, but any other logic functions should be declared here, such as "findByName". The function signature is specific and should contain fields declared in the entity as well as operation keywords (findBy)
+### Operations such as "add to database" don't need to be definded, since they are implicit, but any other logic functions should be implemented here, such as "findByName". The function signature is specific and should contain fields declared in the entity as well as operation keywords (findBy)
 <br>
 <br>
 
@@ -166,11 +166,11 @@ public class UserController {
 <br> <br>
 ### 2. Websocket
 
-### Websockets consist of parts split between Spring and React. The Spring side models the template of a STOMP architecture, adding SockJS sockets over it. Simply put, messages will be handled server-side by a already existing message broker, which just needs to be configured: endpoints and destination prefixes.
+### Websockets consist of parts split between Spring and React. The Spring side models the template of a STOMP architecture, adding SockJS sockets over it. Simply put, messages will be handled server-side by an already existing message broker, which just needs to be configured: endpoints and destination prefixes.
 
 <br>
 
-### Real-time messages with multiple users at the same time is enabled by adding a controller using the message broker and creating multiple route paths according to a variable, which in our case is the username of the one we want to connect to. 
+### Real-time messages with multiple users at the same time is enabled by adding a controller using the message broker and creating multiple route paths according to a variable, which in our case is the username of the user we want to connect to. 
 
 ~~~java
 @RestController // Handles incoming messages and sends them to the users.
@@ -219,7 +219,7 @@ function App () {
 export default App;
 ~~~
 
-### Registering creates a request to the database API for creating a user. Logging in creates a request for finding a user by a specified name and password. The values that are sent in the request are taken from events triggered by entering input on the textboxes. Short example: 
+### When a user wants to register, a request for creating a user is sent to the database API. Logging in creates a request for finding a user by a specified name and password. The values that are sent through the request are taken from events triggered by entering input on the textboxes. Short example: 
 
 ~~~js
     // Password and name are state variables set by input events.
@@ -237,10 +237,10 @@ export default App;
     }
 ~~~
 
-### The front-end contains of 5 big state variables which generate the flow of the feed. 
-#### - The user is the one whose name is used for socket subscribe initialisation and message object sender field.
-#### - The friends array is used to keep track of friends. This array is being loaded from DB at the first render, then it can be modified by adding another friend from the "+" button. Every friend is rendered on the "conversations" component.
-#### - The messages array is similar in functionality to the friends array, but rendered on a different component.
+### The front-end consists of 5 big state variables which generate the flow of the feed. 
+#### - The user is the one whose name is used for socket subscribe initialization and message object sender field.
+#### - The "friends" array is used to keep track of friends. This array is being loaded from DB at the first render, then it can be modified by adding another friend from the "+" button. Every friend is rendered on the "conversations" component.
+#### - The "messages" array is similar in functionality to the "friends" array, but rendered in a different component.
 #### - The conversation state is toggled when clicking on a friend and is used as a link between friends and messages. 
 
 
