@@ -10,9 +10,12 @@ const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
             // Fetch the message using plain DOM manipulation
             var message = document.getElementById("InputId").value;
 
+            if ( message === "" )
+                return;
+
             var content = JSON.stringify({
-                sender: user,
                 receiver: conversation,
+                sender: user,
                 content: message
             })
 
@@ -21,8 +24,8 @@ const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
             // Add message to message array in order to print it on screen
 
             var toSend = ({
-                sender : user,
                 receiver: conversation,
+                sender : user,
                 content: message
             })
 
