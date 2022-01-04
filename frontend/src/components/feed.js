@@ -41,6 +41,17 @@ const Feed = ({ user, setUser }) => {
     // the fact that no conversation has yet to be selected by the user
     const [conversation, setConversation] = useState("y!MVd(DA*x3@&fw");
 
+    /** PERSISTING THE STATE OF THE USER*/
+    useEffect(() => {
+        const data = localStorage.getItem("userSaved");
+        if (data) {
+            setUser(JSON.parse(data));
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("userSaved", JSON.stringify(user));
+    })
 
     /** FETCHING FROM DATABASE */
     // Friends
@@ -51,8 +62,9 @@ const Feed = ({ user, setUser }) => {
             let aux = [];
             data.map((data) => aux = [...aux, data.user2]);
             setFriends(aux);
+            console.log("Friends2: " + data)
         }
-        getFriends()
+        getFriends().then()
     }, [])
 
     const fetchFriends = async () => {

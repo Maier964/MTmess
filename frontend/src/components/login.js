@@ -40,7 +40,6 @@ const Login = ({ setUser }) => {
             /*console.log(data)*/
             setOk(true);
             setUser(name);
-            window.localStorage.setItem('name', JSON.stringify(name));
             navigate('/feed');
         }
         catch {

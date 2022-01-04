@@ -43,12 +43,12 @@ h4 {
   min-height: 25px;
 
   position: absolute;
-  bottom: 0px;
-  right: 0px;
+  bottom: 0;
+  right: 0;
 
-  border: 0px;
-  padding: 0px;
-  margin: 0px;
+  border: 0;
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 
   background-color: azure;
@@ -70,8 +70,8 @@ h4 {
 
   border: 1px solid gray;
   border-radius: 1.5%;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 /*Button:hover {
@@ -94,7 +94,7 @@ h4 {
 
   position: absolute;
   top: 5%;
-  left: 0px;
+  left: 0;
   box-sizing: border-box;
 
   background-color: azure;
@@ -105,7 +105,7 @@ h4 {
 .conversation {
   font-size: 20px;
   font-family: Arial sans-serif;
-  border-top: 0px;
+  border-top: 0;
   border-bottom: 1px dotted #696969;
   min-height: 25px;
   height: 7.5%;
@@ -119,7 +119,7 @@ h4 {
 
   position: absolute;
   top: 5%;
-  right: 0px;
+  right: 0;
   box-sizing: border-box;
   background-image: url("./images/chat-background.jpg");
   overflow-y: scroll;
@@ -169,25 +169,27 @@ h4 {
 .userbar {
   background-color: lightskyblue;
   position: absolute;
-  left: 0px;
+  left: 0;
   width: 33.3%;
   height: 5%;
-  margin: 0px;
-  padding: 0px;
+  min-height: 25px;
+  min-width: 100px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-
 #addButton{
   position: relative; /* Fix this so the position is always in the right side of the UserBar */
-  left: 300px;
+  float: right;
 }
 
 #AddFriend{
   position: relative;
-  right: 3000px;
+  float: bottom;
+  height: 95%;
+  border: 2px solid red;
 }
-
 
 .message.received::after{
   content: '';

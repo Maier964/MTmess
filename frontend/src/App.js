@@ -4,7 +4,7 @@ import Feed from './components/feed';
 import Login from './components/login';
 import Register from './components/register'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function App () {
 
