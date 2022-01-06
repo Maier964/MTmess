@@ -27,7 +27,7 @@ public class UserController {
             // Hashes the password that was given by the user in the request
             user.setHashedpassword( user.getHash( user.getHashedpassword() ) );
             userService.saveUser(user);
-            return "User was added!";  // TO BE IMPLEMENTED: if user already exists, don't print this
+            return "User was added!";
         }catch ( Exception e ) {
             return "Failed to add user.";
         }

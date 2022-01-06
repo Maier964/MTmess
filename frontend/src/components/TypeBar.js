@@ -41,7 +41,7 @@ const TypeBar = ({ user, conversation, setMessages, stompClient }) => {
             };
 
             // Send request
-            fetch('http://localhost:8080/message/add', request)
+            fetch('http://mtmess.me:8080/message/add', request)
                 .then( console.log("Added message to db...") )
         }
 

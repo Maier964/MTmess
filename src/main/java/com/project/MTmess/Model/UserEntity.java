@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-@Table(name = "Users")
+@Table(name = "users")
 @Entity
 public class UserEntity{
 

@@ -38,7 +38,7 @@ const Register = () => {
             return;
         }
         console.log(user)
-        fetch("http://localhost:8080/user/add",{
+        fetch("http://mtmess.me:8080/user/add",{ // http://mtmess.me:8080/user/add
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(user),

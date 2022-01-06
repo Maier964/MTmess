@@ -76,7 +76,7 @@ const Feed = ({ user, setUser }) => {
         }
 
     const fetchFriends = async () => {
-        const response = await fetch(`http://localhost:8080/friendship/find?user1=${user}&user2=`)
+        const response = await fetch(`http://mtmess.me:8080/friendship/find?user1=${user}&user2=`)
         try {
             const data = await response.json()
             return data
@@ -101,7 +101,7 @@ const Feed = ({ user, setUser }) => {
     // Fetch messages of current user with ${conversation}
     const fetchMessages = async (conversation) => {
         /** TODO 6: CHECK FOR ERROR UPON RETRIEVING THE DATA FROM BACKEND */
-        const response = await fetch(`http://localhost:8080/message/find/and?user1=${user}&user2=${conversation}`);
+        const response = await fetch(`http://mtmess.me:8080/message/find/and?user1=${user}&user2=${conversation}`);
         const data = await response.json();
         return data
     }
@@ -109,7 +109,7 @@ const Feed = ({ user, setUser }) => {
     /** SOCKETS */
     const socketInit = () => {
         // Using SockJS over Stomp
-        let mySocket = new SockJS('http://localhost:8080/chat/' );
+        let mySocket = new SockJS('http://mtmess.me:8080/chat/' );
         aux = Stomp.over(mySocket);
 
         aux.connect( {username:user} , function(frame) {

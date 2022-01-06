@@ -45,6 +45,8 @@ public class ChatController {
 
         connection.disconnect();
 
+        // Message should be added to DB here, not in react
+
         if ( response.length() != 0 )
         {
             // continue, user was found.

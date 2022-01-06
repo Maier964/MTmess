@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 
     public UserEntity findByNameAndHashedpassword(String name, String hashed_password){
         UserEntity aux = new UserEntity();
-        hashed_password = aux.getHash(hashed_password); // hashing the password so the hashes match. This could be done in any step
+        hashed_password = aux.getHash(hashed_password);
         return userRepository.findByNameAndHashedpassword(name, hashed_password);
     }
 

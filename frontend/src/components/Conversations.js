@@ -25,7 +25,7 @@ const Conversations = ({ user, setConversation, friends, addButton, setAddButton
         console.log("Friend querry: " + friendQuery)
 
         // Send request
-        fetch('http://localhost:8080/friendship/add', request)
+        fetch('http://mtmess.me:8080/friendship/add', request)
             .then(); // friend will get added in the 'friends' state var from the db on the next render
 
         console.log("Request: " + JSON.stringify(request))
@@ -43,7 +43,7 @@ const Conversations = ({ user, setConversation, friends, addButton, setAddButton
         let aux = [];
         var i;
         // Simple get request
-        fetch('http://localhost:8080/user/find/all') // returns a promise
+        fetch('http://mtmess.me:8080/user/find/all') // returns a promise
             .then( function(response) { return response.json(); } ) // ALSO returns a promise ( haha )
             .then( function(rawData) {
                 for( i = 0; i < rawData.length; i++ )

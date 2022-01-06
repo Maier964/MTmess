@@ -34,11 +34,10 @@ const Login = ({ setUser }) => {
     const [password,setPassword]=useState('');
 
     const clickHandler = async () => {
-        const response = await fetch(`http://localhost:8080/user/find/log?name=${name}&password=${password}`)
+        const response = await fetch(`http://mtmess.me:8080/user/find/log?name=${name}&password=${password}`)
         try {
             const data = await response.json()
-            /*console.log(data)*/
-            setOk(true);
+//            setOk(true);
             setUser(name);
             navigate('/feed');
         }
