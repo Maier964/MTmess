@@ -23,20 +23,11 @@ h4 {
 .feed {
   height: 100%;
   width: 100%;
-  background-image: url("./images/page-background-1.jfif");
+  background-image: url("./images/page-background-1.jpg");
+  background-size: cover;
   margin: auto;
   position: absolute;
 }
-
-.messagewindow {
-  margin: auto;
-  width: 80%;
-  height: 80%;
-  margin-top: 20px;
-  position: relative;
-  background-color: white;
-}
-
 .typebarwrapper {
   width: 66.7%;
   height: 10%;
@@ -51,7 +42,7 @@ h4 {
   margin: 0;
   box-sizing: border-box;
 
-  background-color: azure;
+  background-color: whitesmoke;
 }
 
 .typebar {
@@ -60,13 +51,13 @@ h4 {
 
   box-sizing: border-box;
 /*  width: 64%;*/
-  width: 60%;
+  width: 57%;
   height: 5%;
   min-height: 25px;
 
   position: absolute;
   bottom: 2.5%;
-  right: 6%;
+  right: 9%;
 
   border: 1px solid gray;
   border-radius: 1.5%;
@@ -74,55 +65,27 @@ h4 {
   margin: 0;
 }
 
-/*Button:hover {
-
-  background-color: green;
-}*/
-
 .sendbutton {
   height: 4.5%;
   width: 4.5%;
   min-height: 25px;
   position: absolute;
-  bottom: 3%;
-  right: 1%;
-}
-
-.friends {
-  height: 95%;
-  width: 33.3%;
-
-  position: absolute;
-  top: 5%;
-  left: 0;
-  box-sizing: border-box;
-
-  background-color: azure;
-  background-color: #f4f4f4;
-  overflow-y: scroll;
-}
-
-.conversation {
-  font-size: 20px;
-  font-family: Arial sans-serif;
-  border-top: 0;
-  border-bottom: 1px dotted #696969;
-  min-height: 25px;
-  height: 7.5%;
-  width: 100%;
-  box-sizing: border-box;
+  bottom: 3.7%;
+  right: 3.8%;
 }
 
 .messages {
   height: 85%;
   width: 66.7%;
-
   position: absolute;
   top: 5%;
   right: 0;
   box-sizing: border-box;
-  background-image: url("./images/chat-background.jpg");
+  background-image: url("./images/chat-background.webp");
+  background-position: center;
+  background-size: cover;
   overflow-y: scroll;
+  padding-top: 1%;
 
 }
 
@@ -133,7 +96,6 @@ h4 {
   padding: 10px;
   background-color: #A8DDFD;
   width: 200px;
-  height: 50px;
   text-align: left;
   font: 400 .9em 'Ubuntu Mono', monospace;;
   border: 1px solid #97C6E3;
@@ -147,7 +109,6 @@ h4 {
   padding: 10px;
   background-color: #adf896;
   width: 200px;
-  height: 50px;
   text-align: left;
   font: 400 .9em 'Ubuntu Mono', monospace;;
   border: 1px solid #87dfa9;
@@ -155,8 +116,37 @@ h4 {
 
 }
 
+.friends {
+  height: 95%;
+  width: 33.3%;
+
+  position: absolute;
+  top: 5%;
+  left: 0;
+  box-sizing: border-box;
+
+  background-color: azure;
+  overflow-y: scroll;
+}
+
+.conversation {
+  font-size: 20px;
+  font-family: Arial sans-serif;
+  border-top: 0;
+  border-bottom: 1px dotted #696969;
+  min-height: 25px;
+  height: 7.5%;
+  width: 100%;
+  padding-left: 30%;
+  padding-left: 30%;
+  box-sizing: border-box;
+  align-items: center;
+  display:flex;
+  align-items:center;
+}
+
 .conversationbar {
-  background-color: cornflowerblue;
+  background-color: lightskyblue;
   position: absolute;
   right: 0px;
   width: 66.7%;
@@ -164,6 +154,7 @@ h4 {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  border-left: 1px solid cornflowerblue;
 }
 
 .userbar {
@@ -185,10 +176,21 @@ h4 {
 }
 
 #AddFriend{
-  position: relative;
-  float: bottom;
-  height: 95%;
-  border: 2px solid red;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  box-sizing: border-box;
+  border: 1px solid darkgray;
+}
+
+.cancelIcon {
+  float: right;
+}
+
+#AddFriendAutocomplete {
+  background-color: white;
 }
 
 .message.received::after{
@@ -237,4 +239,29 @@ h4 {
     border-right: 16px solid transparent;
     bottom: -1px;
     right: -17px;
+}
+
+.messagewindow {
+  margin: auto;
+  width: 70%;
+  height: 80%;
+  margin-top: 20px;
+  position: relative;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+
+.maier {
+  max-width: 15%;
+  position: absolute;
+  top: 10%;
+  right: 3%;
+}
+
+.thomas {
+  max-width: 15%;
+  position: absolute;
+  top: 11%;
+  left: 2.5%;
 }

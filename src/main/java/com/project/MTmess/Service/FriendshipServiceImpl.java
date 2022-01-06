@@ -25,16 +25,16 @@ public class FriendshipServiceImpl implements FriendshipService{
         // Check if users exist
 
         String url = "http://localhost:8080/user/find?name={q}";
-        String url2 = "http://localhost:8080/user/find/and?user1={a}&user2={b}";
+        String url2 = "http://localhost:8080/friendship/find/and?user1=" + friendship.getUser1() + "&user2=" + friendship.getUser2();
 
         RestTemplate restTemplate = new RestTemplate();
 
         String req = restTemplate.getForObject(url, String.class, friendship.getUser1());
         String req2 = restTemplate.getForObject(url, String.class, friendship.getUser2());
-        String req3 = restTemplate.getForObject(url2, String.class, friendship.getUser1(), friendship.getUser2());
+        String req3 = restTemplate.getForObject(url2, String.class);
 
         if ( req == null || req2 == null )  throw new InvalidFriendshipException("Users don't exist!"); // Users dont exist - Return exception
-        if ( req3 == null) throw new DuplicateFriendshipException("Friendship already exists!");
+        if ( req3 != null) throw new DuplicateFriendshipException("Friendship already exists!");
 
         if (friendship.getUser1().equals(friendship.getUser2())){ // Users are the same
             throw new SelfFriendshipException("User1 is equal to User2... Such a shame");

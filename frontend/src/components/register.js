@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core'
 import  AddReaction  from '@mui/icons-material/AddReaction'
 import { Typography } from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -10,14 +11,16 @@ const Register = () => {
         margin:'55px 0'
     }
 
-    const paperStyle={ padding: 20 , 
-        height:'80vh', 
+    const paperStyle={ padding: 20 ,
+        height:'80vh',
         width : 280,
         margin:"20px auto",} // vf - viewport height
 
-    const avatarStyle = { 
+    const avatarStyle = {
         backgroundColor: '#21bfa6',
     }
+
+    let navigate = useNavigate();
 
     // Used for exporting to backend
     const [name,setName]=useState('');
@@ -28,16 +31,24 @@ const Register = () => {
         e.preventDefault()
         const user={name,email,hashedpassword}
         console.log(user)
+        if ( user.name === "" || user.email === "" || user.hashedpassword === "" )
+        {
+            alert("Invalid credentials");
+            navigate('/');
+            return;
+        }
+        console.log(user)
         fetch("http://localhost:8080/user/add",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(user),
-        }).then(()=>{
-            alert("Registration was successful!")})
+        }).then(()=>{})
+        alert("Registration was successful!");
+        navigate("/");
         }
 
     return (
-        <Grid> 
+        <Grid>
         <Paper elevation={10} style={paperStyle}>
             <Grid align='center'>
                     <Avatar style={avatarStyle}> <AddReaction/>  </Avatar>
@@ -57,13 +68,13 @@ const Register = () => {
             <Button variant='contained' type='submit' color='primary' fullwidth={true} style={buttonStyle} onClick={clickHandler}> Register </Button>
 
 
-            <Typography> 
+            <Typography>
             <Button href="/" variant='contained' type='submit' color='primary' fullwidth={true} style={buttonStyle}> Back </Button>
             </Typography>
             </Grid>
         </Paper>
     </Grid>
-    );  
+    );
 };
 
 export default Register;

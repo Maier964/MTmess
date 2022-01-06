@@ -6,6 +6,8 @@ import Conversations from "./Conversations";
 import { useState, useEffect } from 'react'
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import maier from "../images/maier-side.png"
+import thomas from "../images/thomas-side.png"
 
 // In order of priority
 /** TODO 1: IMPLEMENT SCROLL ON THE MESSAGES PAGE*/
@@ -20,6 +22,9 @@ const Feed = ({ user, setUser }) => {
     console.log("Feed?user: " + user);
 
     let aux = null;
+
+    // When addButton is 1, the field for adding a friend will show
+    const [addButton, setAddButton] = useState(0);
 
     const [stompClient, setStompClient] = useState([{}]);
 
@@ -44,7 +49,7 @@ const Feed = ({ user, setUser }) => {
     /** PERSISTING THE STATE OF THE USER*/
     useEffect(async () => {
         const getFriends = async () => {
-            await sleep(3000);
+            await sleep(200);
             console.log("Feed/getFriends?user: " + user)
             const data = await fetchFriends()
             console.log("Debug 2 " + user);
@@ -133,10 +138,16 @@ const Feed = ({ user, setUser }) => {
         <div className={'messagewindow'}>
             <Messages user={user} conversation={conversation} messages={messages}/>
             <TypeBar user={user} conversation={conversation} setMessages={setMessages} stompClient={stompClient}/>
-            <Conversations setConversation={setConversation} friends={friends} stompClient={stompClient}/>
-            <UserBar user={user} setFriends={setFriends}/>
+            <Conversations user={user}
+                           setConversation={setConversation}
+                           friends={friends}
+                           stompClient={stompClient}
+                           addButton={addButton} setAddButton={setAddButton}/>
+            <UserBar user={user} setFriends={setFriends} setAddButton={setAddButton}/>
             <ConversationBar conversation={conversation}/>
         </div>
+        <img className={"thomas"} src={thomas}/>
+        <img className={"maier"} src={maier}/>
         </body>
     )
 }
