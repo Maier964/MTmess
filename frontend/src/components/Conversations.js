@@ -2,8 +2,6 @@ import Conversation from "./Conversation";
 
 const Conversations = ({ setConversation, friends }) => {
 
-    console.log("Conversations: " + friends)
-
     return (
         <div className={'friends'}>
             {

@@ -17,7 +17,7 @@ import Stomp from 'stompjs';
 
 const Feed = ({ user, setUser }) => {
 
-    console.log("User: " + user);
+    console.log("Feed?user: " + user);
 
     let aux = null;
 
@@ -28,9 +28,9 @@ const Feed = ({ user, setUser }) => {
 
     const [messages, setMessages] = useState([
         {
-        sender: " ",
-        receiver: " ",
-        content: " "
+            sender: " ",
+            receiver: " ",
+            content: " "
         }
     ]); // array of objects
 
@@ -42,11 +42,20 @@ const Feed = ({ user, setUser }) => {
     const [conversation, setConversation] = useState("y!MVd(DA*x3@&fw");
 
     /** PERSISTING THE STATE OF THE USER*/
-    useEffect(() => {
-        const data = localStorage.getItem("userSaved");
-        if (data) {
-            setUser(JSON.parse(data));
+    useEffect(async () => {
+        const getFriends = async () => {
+            await sleep(3000);
+            console.log("Feed/getFriends?user: " + user)
+            const data = await fetchFriends()
+            console.log("Debug 2 " + user);
+            let aux = [];
+            console.log("Debug 3 " + user);
+            data.map((data) => aux = [...aux, data.user2]);
+            setFriends(aux);
+            console.log("Feed/getFriends?data: " + data)
         }
+        await getFriends();
+        console.log("Debug 4 " + user);
     }, [])
 
     useEffect(() => {
@@ -54,18 +63,12 @@ const Feed = ({ user, setUser }) => {
     })
 
     /** FETCHING FROM DATABASE */
-    // Friends
-    // Get the friends of the current ${user} once
-    useEffect(() => {
-        const getFriends = async () => {
-            const data = await fetchFriends()
-            let aux = [];
-            data.map((data) => aux = [...aux, data.user2]);
-            setFriends(aux);
-            console.log("Friends2: " + data)
+        // Friends
+        // Get the friends of the current ${user} once
+
+    const sleep = (millisec) => {
+            return new Promise(resolve => setTimeout(resolve, millisec));
         }
-        getFriends().then()
-    }, [])
 
     const fetchFriends = async () => {
         const response = await fetch(`http://localhost:8080/friendship/find?user1=${user}&user2=`)
@@ -109,8 +112,8 @@ const Feed = ({ user, setUser }) => {
             {
                 showMessageOutput(JSON.parse(messageOutput.body));
             });
-         } );
-         setStompClient(aux);
+        } );
+        setStompClient(aux);
     }
 
     const showMessageOutput= (messageOutput) => {
@@ -127,13 +130,13 @@ const Feed = ({ user, setUser }) => {
 
     return (
         <body className={'feed'}>
-            <div className={'messagewindow'}>
-                <Messages user={user} conversation={conversation} messages={messages}/>
-                <TypeBar user={user} conversation={conversation} setMessages={setMessages} stompClient={stompClient}/>
-                <Conversations setConversation={setConversation} friends={friends} stompClient={stompClient}/>
-                <UserBar user={user} setFriends={setFriends}/>
-                <ConversationBar conversation={conversation}/>
-            </div>
+        <div className={'messagewindow'}>
+            <Messages user={user} conversation={conversation} messages={messages}/>
+            <TypeBar user={user} conversation={conversation} setMessages={setMessages} stompClient={stompClient}/>
+            <Conversations setConversation={setConversation} friends={friends} stompClient={stompClient}/>
+            <UserBar user={user} setFriends={setFriends}/>
+            <ConversationBar conversation={conversation}/>
+        </div>
         </body>
     )
 }

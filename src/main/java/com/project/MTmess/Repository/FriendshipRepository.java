@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface FriendshipRepository extends JpaRepository<FriendshipEntity, Integer> {
     List<FriendshipEntity> findAllByUser1OrUser2(String user1, String user2);
+    FriendshipEntity findAllByUser1AndUser2(String user1, String user2);
 }

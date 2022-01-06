@@ -1,5 +1,6 @@
 package com.project.MTmess.Controller;
 
+import com.project.MTmess.Exception.DuplicateFriendshipException;
 import com.project.MTmess.Exception.InvalidFriendshipException;
 import com.project.MTmess.Exception.SelfFriendshipException;
 import com.project.MTmess.Model.FriendshipEntity;
@@ -36,11 +37,19 @@ public class FriendshipController {
         catch ( SelfFriendshipException e){
             return "Error : User1 is the same with User2!";
         }
+        catch ( DuplicateFriendshipException e) {
+            return "Error: Friendship already exists!";
+        }
 
     }
 
-    @GetMapping("/find")
+    @GetMapping("/find")  // change path to make it more suggestive
     public ResponseEntity<List<FriendshipEntity>> findAllByUser1OrUser2(@RequestParam String user1, @RequestParam String user2) {
         return new ResponseEntity<>(friendshipService.findAllByUser1OrUser2(user1, user2), HttpStatus.OK);
+    }
+
+    @GetMapping("/find/and")  //
+    public ResponseEntity<FriendshipEntity> findAllByUser1AndUser2(@RequestParam String user1, @RequestParam String user2) {
+        return new ResponseEntity<>(friendshipService.findAllByUser1AndUser2(user1, user2), HttpStatus.OK);
     }
 }

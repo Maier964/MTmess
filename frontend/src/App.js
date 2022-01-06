@@ -8,7 +8,18 @@ import {useState, useEffect} from 'react';
 
 function App () {
 
-  const [user, setUser] = useState();
+  const getUserFromLocalStorage = () => {
+    const data = localStorage.getItem("userSaved");
+    console.log("Feed/getFromLocalStorage/user?: " + data)
+    if (data) {
+      console.log("Debug 1 " + data);
+      //console.log("Before " + user);
+      const pdata = JSON.parse(data)
+      return pdata;
+    }
+  };
+
+  const [user, setUser] = useState(getUserFromLocalStorage());
 
   return (
     <>

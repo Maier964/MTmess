@@ -4,7 +4,6 @@ const Conversation = ({ friend, setConversation}) => {
     // "propagate" back towards the feed page, so that it
     // can be passed to the messages
     // We do this by setConversation
-    console.log("Conversation: " + friend)
     return (
         <h3 className={"conversation"} onDoubleClick={() => setConversation(friend)}>
             {friend}
