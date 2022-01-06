@@ -30,7 +30,7 @@ The users are able to register, log in, add friends and send messages trough web
 # To start the back-end, go to the root project directory and use maven
     mvn spring::boot run
 
-# To start the front-end component, go to "/frontend/src/" and use the NodeJs packet manager
+# To start the front-end component, go to "/frontend" and use the NodeJs packet manager
     npm start
 
 # You should see your app running on localhost, port 3000
