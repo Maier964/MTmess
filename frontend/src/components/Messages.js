@@ -9,7 +9,7 @@ const Messages = ({ user, conversation, messages }) => {
                 conversation === "y!MVd(DA*x3@&fw" ?
                     <h4>Choose a conversation</h4> :
                     (messages.length > 0 ?  // change this
-                        messages.map((message) => (
+                        messages.filter((message) => message.sender === user || message.sender === conversation).map((message) => (
                             message.sender === user ?
                                 <Message message={message} sent={true}/> :
                                 <Message message={message} sent={false}/>
@@ -19,5 +19,5 @@ const Messages = ({ user, conversation, messages }) => {
         </div>
     )
 }
-
+// Commit test
 export default Messages;
