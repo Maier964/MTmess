@@ -19,11 +19,10 @@ public class UserServiceImpl implements UserService{
 
         UserEntity userAux = userRepository.findByName(user.getName());
 
-        System.out.println(userAux);
         if (userAux == null) {
             return userRepository.save(user);
         }
-        System.out.println("User already exists");
+
         return null;
     }
 

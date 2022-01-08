@@ -42,7 +42,12 @@ const Register = () => {
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(user),
-        }).then(()=>{})
+        }).then((response)=>{
+            console.log("Response : " + response.body);
+            if (response.body === "Failed to add user") {
+                alert("User already exists!")
+            }
+        })
         alert("Registration was successful!");
         navigate("/");
         }

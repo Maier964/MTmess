@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Feed from './components/feed';
-import Login from './components/login';
-import Register from './components/register'
+import Feed from './components/Feed';
+import Login from './components/Login';
+import Register from './components/Register'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import {useState, useEffect} from 'react';
 
