@@ -25,7 +25,7 @@ The users are able to register, log in, add friends and send messages trough web
 
 ~~~bash
 # To clone the repository, simply use
-    git clone https://github.com/OOP-Projects-2021-2022/MTmess.git
+    git clone https://github.com/Maier964/MTmess.git
 
 # To start the back-end, go to the root project directory and use maven
     mvn spring::boot run
