@@ -1,5 +1,10 @@
 # MTMESS 
 ## Overview
+
+<img src="https://user-images.githubusercontent.com/71098304/172190269-79f64853-b68d-4ff8-9d98-00681b9689b6.png" width=184 height=301>
+
+
+
 ~~~sql
 ~ Web message application made with Spring, ReactJS and PostgreSQL.
 The users are able to register, log in, add friends and send messages trough websockets. 
