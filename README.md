@@ -6,10 +6,10 @@
 The users are able to register, log in, add friends and send messages trough websockets. 
 ~~~
 
-
-
-<img style="border:1px solid black"
+<img style="border:1px solid black; display:block; margin-left:auto; margin-right:auto"
      src="https://user-images.githubusercontent.com/71098304/172190269-79f64853-b68d-4ff8-9d98-00681b9689b6.png" width=184 height=301>
+    
+
 
 ## Technologies
 
